@@ -1,0 +1,22 @@
+[PROJECT]
+Target=main3.hex
+Processor_Text=PIC16F877A
+CCSVerions=5.015
+Compiler=PCM
+CCSVersion=5.015
+[Target Data]
+FileList=main3.c
+[Directories]
+Include=C:\Program Files (x86)\PICC\Devices\;C:\Program Files (x86)\PICC\Drivers\
+[E:\mikro lab\ödev1\3. madde\main3]
+Type=4
+[mru-list]
+1=main3.c
+[Opened Files]
+1=main3.c
+2=
+[main3.c]
+Type=4
+[Units]
+Count=1
+1=main3 (main)

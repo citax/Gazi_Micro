@@ -1,0 +1,24 @@
+#include <main.h>
+#fuses HS, NOWDT, NOPROTECT 
+#use delay(clock=4000000)
+#define up PIN_A0
+
+
+void main()
+{
+   
+   set_tris_a(0xFF);
+   set_tris_b(0x00);
+   set_tris_c(0x00);
+   output_b(0x00);
+   output_c(0x00);
+   
+   while(TRUE)
+   {
+      
+      
+      
+      
+   }
+
+}

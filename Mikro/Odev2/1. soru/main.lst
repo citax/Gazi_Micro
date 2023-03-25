@@ -1,0 +1,264 @@
+CCS PCM C Compiler, Version 5.015, 5967               15-Mar-23 01:21
+
+               Filename:   E:\mikro\Ödev2\main.lst
+
+               ROM used:   162 words (2%)
+                           Largest free fragment is 2048
+               RAM used:   8 (2%) at main() level
+                           9 (2%) worst case
+               Stack used: 1 locations
+               Stack size: 8
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   019
+0003:  NOP
+.................... #include <main.h> 
+.................... #include <16F877A.h> 
+.................... //////////// Standard Header file for the PIC16F877A device //////////////// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996, 2013 Custom Computer Services          //// 
+.................... //// This source code may only be used by licensed users of the CCS C  //// 
+.................... //// compiler.  This source code may only be distributed to other      //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction //// 
+.................... //// or distribution is permitted without written permission.          //// 
+.................... //// Derivative programs created using this software in object code    //// 
+.................... //// form are not restricted in any way.                               //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... #device PIC16F877A 
+....................  
+.................... #list 
+....................  
+.................... #device ADC=16 
+....................  
+.................... #FUSES NOWDT                 	//No Watch Dog Timer 
+.................... #FUSES NOBROWNOUT            	//No brownout reset 
+.................... #FUSES NOLVP                 	//No low voltage prgming, B3(PIC16) or B5(PIC18) used for I/O 
+....................  
+.................... #use delay(crystal=4MHz) 
+....................  
+....................  
+.................... #fuses XT, NOWDT, NOPROTECT 
+.................... #use delay(clock=4000000) 
+0004:  MOVLW  23
+0005:  MOVWF  04
+0006:  BCF    03.7
+0007:  MOVF   00,W
+0008:  BTFSC  03.2
+0009:  GOTO   018
+000A:  MOVLW  01
+000B:  MOVWF  78
+000C:  CLRF   77
+000D:  DECFSZ 77,F
+000E:  GOTO   00D
+000F:  DECFSZ 78,F
+0010:  GOTO   00C
+0011:  MOVLW  4A
+0012:  MOVWF  77
+0013:  DECFSZ 77,F
+0014:  GOTO   013
+0015:  GOTO   016
+0016:  DECFSZ 00,F
+0017:  GOTO   00A
+0018:  RETURN
+.................... #define start pin_A0 
+.................... #define stop pin_A1 
+.................... int a,b,led; 
+.................... void main() 
+0019:  MOVF   03,W
+001A:  ANDLW  1F
+001B:  MOVWF  03
+001C:  BSF    03.5
+001D:  BSF    1F.0
+001E:  BSF    1F.1
+001F:  BSF    1F.2
+0020:  BCF    1F.3
+0021:  MOVLW  07
+0022:  MOVWF  1C
+0023:  BCF    03.7
+.................... { 
+.................... setup_psp(PSP_DISABLED);  
+0024:  BCF    09.4
+.................... setup_timer_1(T1_DISABLED);  
+0025:  BCF    03.5
+0026:  CLRF   10
+.................... setup_timer_2(T2_DISABLED,0,1);  
+0027:  MOVLW  00
+0028:  MOVWF  78
+0029:  MOVWF  12
+002A:  MOVLW  00
+002B:  BSF    03.5
+002C:  MOVWF  12
+.................... setup_adc_ports(NO_ANALOGS);  
+002D:  BSF    1F.0
+002E:  BSF    1F.1
+002F:  BSF    1F.2
+0030:  BCF    1F.3
+.................... setup_adc(ADC_OFF);  
+0031:  BCF    03.5
+0032:  BCF    1F.0
+.................... setup_CCP1(CCP_OFF);  
+0033:  MOVLW  F0
+0034:  ANDWF  17,F
+.................... setup_CCP2(CCP_OFF);  
+0035:  ANDWF  1D,F
+.................... set_tris_a(0xFF); 
+0036:  MOVLW  FF
+0037:  BSF    03.5
+0038:  MOVWF  05
+.................... set_tris_b(0x00); 
+0039:  MOVLW  00
+003A:  MOVWF  06
+.................... output_b(0x00); 
+003B:  CLRF   06
+003C:  BCF    03.5
+003D:  CLRF   06
+.................... While(TRUE){ 
+.................... if(input(start)) 
+003E:  BSF    03.5
+003F:  BSF    05.0
+0040:  BCF    03.5
+0041:  BTFSS  05.0
+0042:  GOTO   0A0
+.................... { 
+.................... led=1; 
+0043:  MOVLW  01
+0044:  MOVWF  22
+.................... if(input(stop)) 
+0045:  BSF    03.5
+0046:  BSF    05.1
+0047:  BCF    03.5
+0048:  BTFSS  05.1
+0049:  GOTO   04F
+.................... { 
+.................... output_b(0x00); 
+004A:  BSF    03.5
+004B:  CLRF   06
+004C:  BCF    03.5
+004D:  CLRF   06
+.................... break;  
+004E:  GOTO   0A1
+.................... } 
+.................... for(b=0;b<100;b++) 
+004F:  CLRF   21
+0050:  MOVF   21,W
+0051:  SUBLW  63
+0052:  BTFSS  03.0
+0053:  GOTO   0A0
+.................... { 
+.................... if(input(stop)) 
+0054:  BSF    03.5
+0055:  BSF    05.1
+0056:  BCF    03.5
+0057:  BTFSS  05.1
+0058:  GOTO   05E
+.................... { 
+.................... output_b(0x00); 
+0059:  BSF    03.5
+005A:  CLRF   06
+005B:  BCF    03.5
+005C:  CLRF   06
+.................... break;  
+005D:  GOTO   0A0
+.................... } 
+.................... for(a=0;a<=7;a++) 
+005E:  CLRF   20
+005F:  MOVF   20,W
+0060:  SUBLW  07
+0061:  BTFSS  03.0
+0062:  GOTO   079
+.................... { 
+.................... if(input(stop)) 
+0063:  BSF    03.5
+0064:  BSF    05.1
+0065:  BCF    03.5
+0066:  BTFSS  05.1
+0067:  GOTO   06D
+.................... {output_b(0x00); 
+0068:  BSF    03.5
+0069:  CLRF   06
+006A:  BCF    03.5
+006B:  CLRF   06
+.................... break;  
+006C:  GOTO   079
+.................... } 
+.................... output_b(led); 
+006D:  BSF    03.5
+006E:  CLRF   06
+006F:  BCF    03.5
+0070:  MOVF   22,W
+0071:  MOVWF  06
+.................... led=led<<1; 
+0072:  BCF    03.0
+0073:  RLF    22,F
+.................... delay_ms(100); 
+0074:  MOVLW  64
+0075:  MOVWF  23
+0076:  CALL   004
+0077:  INCF   20,F
+0078:  GOTO   05F
+.................... }  
+.................... led=0x80; 
+0079:  MOVLW  80
+007A:  MOVWF  22
+.................... output_b(led); 
+007B:  BSF    03.5
+007C:  CLRF   06
+007D:  BCF    03.5
+007E:  MOVF   22,W
+007F:  MOVWF  06
+.................... delay_ms(100); 
+0080:  MOVLW  64
+0081:  MOVWF  23
+0082:  CALL   004
+.................... for(a=0; a<=6;a++) 
+0083:  CLRF   20
+0084:  MOVF   20,W
+0085:  SUBLW  06
+0086:  BTFSS  03.0
+0087:  GOTO   09E
+.................... { 
+.................... if(input(stop)) 
+0088:  BSF    03.5
+0089:  BSF    05.1
+008A:  BCF    03.5
+008B:  BTFSS  05.1
+008C:  GOTO   092
+.................... { 
+.................... output_b(0x00); 
+008D:  BSF    03.5
+008E:  CLRF   06
+008F:  BCF    03.5
+0090:  CLRF   06
+.................... break;  
+0091:  GOTO   09E
+.................... } 
+.................... led=led>>1; 
+0092:  BCF    03.0
+0093:  RRF    22,F
+.................... output_b(led); 
+0094:  BSF    03.5
+0095:  CLRF   06
+0096:  BCF    03.5
+0097:  MOVF   22,W
+0098:  MOVWF  06
+.................... delay_ms(100); 
+0099:  MOVLW  64
+009A:  MOVWF  23
+009B:  CALL   004
+009C:  INCF   20,F
+009D:  GOTO   084
+.................... } 
+009E:  INCF   21,F
+009F:  GOTO   050
+.................... } 
+.................... } 
+00A0:  GOTO   03E
+.................... } 
+.................... } 
+....................  
+00A1:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F31   XT NOWDT PUT NOBROWNOUT NOLVP NOCPD NOWRT NODEBUG NOPROTECT
