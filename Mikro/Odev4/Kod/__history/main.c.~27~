@@ -6,8 +6,7 @@
 #define pin_down pin_A1
 #define pin_stop pin_A2
 
-int i,x,a,b = 0;
-int first_digit, second_digit, overflow = 0;
+int i,x,a = 0;
 int down, up, stop= 0;
 int number[10] = { 0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7C, 0x07, 0x7F, 0x6F};
 
@@ -44,13 +43,13 @@ void button_stop()
 
 void delay_stop()
 {
-   for(int z=0; z<40; z++)
+   for(i=0; i<40; i++)
    {
       delay_ms(5);
       button_stop();
-      button_down();
-      button_up();
-   } 
+      
+   }
+   
 }
 
 void main()
@@ -70,33 +69,20 @@ void main()
       
       while(up == 1)
       {
-         
          for(i=0 ; i<10; i++)
          {  
-            if(first_digit == 10)
+            x = number[i];
+            output_b(x);
+            delay_stop();
+            a++;
+            if(a)
             {
-               overflow++;
-               first_digit=0;
-               if (overflow == 10)
-               overflow = 0;
+            
             }
             
-            if(0 < overflow < 10)
-            {  
-               a = number[overflow];
-               output_c(0x02);
-               output_b(a);
-               delay_ms(10);
-            }
-            
-            x = number[i]; //# first digit up
-            output_c(0x01);
-            output_b(x);   //# first digit up
-            first_digit++; //# first digit up
-            delay_stop();  // delay stop function
          }
       }
       
    }
-}
 
+}

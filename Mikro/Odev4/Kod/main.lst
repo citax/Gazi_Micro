@@ -1,18 +1,18 @@
-CCS PCM C Compiler, Version 5.015, 5967               25-Mar-23 17:39
+CCS PCM C Compiler, Version 5.015, 5967               26-Mar-23 10:17
 
                Filename:   E:\Okul\Mikro\mikro\Odev4\Kod\main.lst
 
-               ROM used:   59 words (1%)
+               ROM used:   236 words (3%)
                            Largest free fragment is 2048
-               RAM used:   17 (5%) at main() level
-                           17 (5%) worst case
-               Stack used: 0 locations
+               RAM used:   27 (7%) at main() level
+                           27 (7%) worst case
+               Stack used: 1 locations
                Stack size: 8
 
 *
 0000:  MOVLW  00
 0001:  MOVWF  0A
-0002:  GOTO   004
+0002:  GOTO   067
 0003:  NOP
 .................... #include <main.h> 
 .................... #include <16F877A.h> 
@@ -41,94 +41,333 @@ CCS PCM C Compiler, Version 5.015, 5967               25-Mar-23 17:39
 ....................  
 .................... #fuses HS, NOWDT, NOPROTECT  
 .................... #use delay(clock=4000000) 
-.................... #define up pin_A0 
-.................... #define down pin_A1 
-.................... #define stop pin_A2 
-.................... int x = 0x01; 
+*
+0052:  MOVLW  35
+0053:  MOVWF  04
+0054:  BCF    03.7
+0055:  MOVF   00,W
+0056:  BTFSC  03.2
+0057:  GOTO   066
+0058:  MOVLW  01
+0059:  MOVWF  78
+005A:  CLRF   77
+005B:  DECFSZ 77,F
+005C:  GOTO   05B
+005D:  DECFSZ 78,F
+005E:  GOTO   05A
+005F:  MOVLW  4A
+0060:  MOVWF  77
+0061:  DECFSZ 77,F
+0062:  GOTO   061
+0063:  GOTO   064
+0064:  DECFSZ 00,F
+0065:  GOTO   058
+0066:  RETURN
+....................  
+.................... #define pin_up pin_A0 
+.................... #define pin_down pin_A1 
+.................... #define pin_stop pin_A2 
+....................  
+.................... int i,x,a,b = 0; 
+.................... int first_digit, second_digit, overflow = 0; 
+.................... int down, up, stop= 0; 
 .................... int number[10] = { 0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7C, 0x07, 0x7F, 0x6F}; 
 *
-0013:  MOVLW  3F
-0014:  BCF    03.5
-0015:  MOVWF  21
-0016:  MOVLW  06
-0017:  MOVWF  22
-0018:  MOVLW  5B
-0019:  MOVWF  23
-001A:  MOVLW  4F
-001B:  MOVWF  24
-001C:  MOVLW  66
-001D:  MOVWF  25
-001E:  MOVLW  6D
-001F:  MOVWF  26
-0020:  MOVLW  7C
-0021:  MOVWF  27
-0022:  MOVLW  07
-0023:  MOVWF  28
-0024:  MOVLW  7F
-0025:  MOVWF  29
-0026:  MOVLW  6F
-0027:  MOVWF  2A
+0077:  MOVLW  3F
+0078:  BCF    03.5
+0079:  MOVWF  2A
+007A:  MOVLW  06
+007B:  MOVWF  2B
+007C:  MOVLW  5B
+007D:  MOVWF  2C
+007E:  MOVLW  4F
+007F:  MOVWF  2D
+0080:  MOVLW  66
+0081:  MOVWF  2E
+0082:  MOVLW  6D
+0083:  MOVWF  2F
+0084:  MOVLW  7C
+0085:  MOVWF  30
+0086:  MOVLW  07
+0087:  MOVWF  31
+0088:  MOVLW  7F
+0089:  MOVWF  32
+008A:  MOVLW  6F
+008B:  MOVWF  33
+....................  
+....................  
+.................... void button_up() 
+.................... { 
+....................     if(!input(pin_stop) && input(pin_up) && !input(pin_down)) 
+*
+0004:  BSF    03.5
+0005:  BSF    05.2
+0006:  BCF    03.5
+0007:  BTFSC  05.2
+0008:  GOTO   01B
+0009:  BSF    03.5
+000A:  BSF    05.0
+000B:  BCF    03.5
+000C:  BTFSS  05.0
+000D:  GOTO   01B
+000E:  BSF    03.5
+000F:  BSF    05.1
+0010:  BCF    03.5
+0011:  BTFSC  05.1
+0012:  GOTO   01B
+....................    { 
+....................       up = 1; 
+0013:  MOVLW  01
+0014:  MOVWF  28
+....................       down, stop = 0; 
+0015:  CLRF   29
+....................       while(input(pin_up)); 
+0016:  BSF    03.5
+0017:  BSF    05.0
+0018:  BCF    03.5
+0019:  BTFSC  05.0
+001A:  GOTO   016
+....................    } 
+001B:  BCF    0A.3
+001C:  BCF    0A.4
+001D:  GOTO   09F (RETURN)
+.................... } 
+....................  
+.................... void button_down() 
+.................... { 
+....................    if(!input(pin_stop) && !input(pin_up) && input(pin_down)) 
+001E:  BSF    03.5
+001F:  BSF    05.2
+0020:  BCF    03.5
+0021:  BTFSC  05.2
+0022:  GOTO   035
+0023:  BSF    03.5
+0024:  BSF    05.0
+0025:  BCF    03.5
+0026:  BTFSC  05.0
+0027:  GOTO   035
+0028:  BSF    03.5
+0029:  BSF    05.1
+002A:  BCF    03.5
+002B:  BTFSS  05.1
+002C:  GOTO   035
+....................    { 
+....................       down = 1; 
+002D:  MOVLW  01
+002E:  MOVWF  27
+....................       up , stop = 0; 
+002F:  CLRF   29
+....................       while(input(pin_down)); 
+0030:  BSF    03.5
+0031:  BSF    05.1
+0032:  BCF    03.5
+0033:  BTFSC  05.1
+0034:  GOTO   030
+....................    } 
+0035:  BCF    0A.3
+0036:  BCF    0A.4
+0037:  GOTO   0A0 (RETURN)
+.................... } 
+....................  
+.................... void button_stop() 
+.................... { 
+....................    if(input(pin_stop) && !input(pin_up) && !input(pin_down)) 
+0038:  BSF    03.5
+0039:  BSF    05.2
+003A:  BCF    03.5
+003B:  BTFSS  05.2
+003C:  GOTO   04F
+003D:  BSF    03.5
+003E:  BSF    05.0
+003F:  BCF    03.5
+0040:  BTFSC  05.0
+0041:  GOTO   04F
+0042:  BSF    03.5
+0043:  BSF    05.1
+0044:  BCF    03.5
+0045:  BTFSC  05.1
+0046:  GOTO   04F
+....................    { 
+....................      stop = 1; 
+0047:  MOVLW  01
+0048:  MOVWF  29
+....................      up, down = 0; 
+0049:  CLRF   27
+....................      while(input(pin_stop)); 
+004A:  BSF    03.5
+004B:  BSF    05.2
+004C:  BCF    03.5
+004D:  BTFSC  05.2
+004E:  GOTO   04A
+....................    } 
+004F:  BCF    0A.3
+0050:  BCF    0A.4
+0051:  GOTO   0A1 (RETURN)
+.................... } 
+....................  
 ....................  
 .................... void main() 
 *
-0004:  MOVF   03,W
-0005:  ANDLW  1F
-0006:  MOVWF  03
-0007:  MOVLW  01
-0008:  MOVWF  20
-0009:  MOVLW  FF
-000A:  MOVWF  2B
-000B:  BSF    03.5
-000C:  BSF    1F.0
-000D:  BSF    1F.1
-000E:  BSF    1F.2
-000F:  BCF    1F.3
-0010:  MOVLW  07
-0011:  MOVWF  1C
-0012:  BCF    03.7
+0067:  MOVF   03,W
+0068:  ANDLW  1F
+0069:  MOVWF  03
+006A:  CLRF   23
+006B:  CLRF   26
+006C:  CLRF   29
+006D:  MOVLW  FF
+006E:  MOVWF  34
+006F:  BSF    03.5
+0070:  BSF    1F.0
+0071:  BSF    1F.1
+0072:  BSF    1F.2
+0073:  BCF    1F.3
+0074:  MOVLW  07
+0075:  MOVWF  1C
+0076:  BCF    03.7
 .................... { 
 ....................     
 ....................    set_tris_a(0xFF); 
 *
-0028:  MOVLW  FF
-0029:  BSF    03.5
-002A:  MOVWF  05
+008C:  MOVLW  FF
+008D:  BSF    03.5
+008E:  MOVWF  05
 ....................    set_tris_b(0x00); 
-002B:  MOVLW  00
-002C:  MOVWF  06
+008F:  MOVLW  00
+0090:  MOVWF  06
 ....................    set_tris_c(0x00); 
-002D:  MOVWF  07
-002E:  BCF    03.5
-002F:  MOVWF  2B
+0091:  MOVWF  07
+0092:  BCF    03.5
+0093:  MOVWF  34
 ....................    output_b(0x00); 
-0030:  BSF    03.5
-0031:  CLRF   06
-0032:  BCF    03.5
-0033:  CLRF   06
-....................    output_c(0x00); 
-0034:  MOVWF  2B
-0035:  BSF    03.5
-0036:  CLRF   07
-0037:  BCF    03.5
-0038:  CLRF   07
-....................     
-....................    /*for(int i=0; i<9; i++) 
-....................    { 
-....................    output_b(x); 
-....................    x = x << 1; 
-....................    delay_ms(100); 
-....................    }*/ 
+0094:  BSF    03.5
+0095:  CLRF   06
+0096:  BCF    03.5
+0097:  CLRF   06
+....................    output_c(0x01); 
+0098:  MOVWF  34
+0099:  BSF    03.5
+009A:  CLRF   07
+009B:  MOVLW  01
+009C:  BCF    03.5
+009D:  MOVWF  07
 ....................  
 ....................    while(TRUE) 
-....................    { 
-0039:  GOTO   039
-....................     
+....................    {   
+....................       button_up(); 
+009E:  GOTO   004
+....................       button_down(); 
+009F:  GOTO   01E
+....................       button_stop(); 
+00A0:  GOTO   038
 ....................        
+....................       while(up == 1) 
+00A1:  DECFSZ 28,W
+00A2:  GOTO   0EA
+....................       { 
+....................           
+....................          for(i=0 ; i<10; i++) 
+00A3:  CLRF   20
+00A4:  MOVF   20,W
+00A5:  SUBLW  09
+00A6:  BTFSS  03.0
+00A7:  GOTO   0E9
+....................          {   
+....................             if(first_digit == 10) 
+00A8:  MOVF   24,W
+00A9:  SUBLW  0A
+00AA:  BTFSS  03.2
+00AB:  GOTO   0B2
+....................             { 
+....................                overflow++; 
+00AC:  INCF   26,F
+....................                first_digit=0; 
+00AD:  CLRF   24
+....................                if (overflow == 10) 
+00AE:  MOVF   26,W
+00AF:  SUBLW  0A
+00B0:  BTFSC  03.2
+....................                overflow = 0; 
+00B1:  CLRF   26
+....................             } 
+....................              
+....................             if(0 < overflow < 10) 
+00B2:  MOVF   26,W
+00B3:  SUBLW  00
+00B4:  BTFSS  03.0
+00B5:  GOTO   0B8
+00B6:  MOVLW  00
+00B7:  GOTO   0B9
+00B8:  MOVLW  01
+00B9:  SUBLW  09
+00BA:  BTFSS  03.0
+00BB:  GOTO   0D1
+....................             {   
+....................                a = number[overflow]; 
+00BC:  MOVLW  2A
+00BD:  ADDWF  26,W
+00BE:  MOVWF  04
+00BF:  BCF    03.7
+00C0:  MOVF   00,W
+00C1:  MOVWF  22
+....................                output_c(0x02); 
+00C2:  MOVLW  00
+00C3:  MOVWF  34
+00C4:  BSF    03.5
+00C5:  CLRF   07
+00C6:  MOVLW  02
+00C7:  BCF    03.5
+00C8:  MOVWF  07
+....................                output_b(a); 
+00C9:  BSF    03.5
+00CA:  CLRF   06
+00CB:  BCF    03.5
+00CC:  MOVF   22,W
+00CD:  MOVWF  06
+....................                delay_ms(10); 
+00CE:  MOVLW  0A
+00CF:  MOVWF  35
+00D0:  CALL   052
+....................             } 
+....................              
+....................        
+....................             x = number[i]; //# first digit up 
+00D1:  MOVLW  2A
+00D2:  ADDWF  20,W
+00D3:  MOVWF  04
+00D4:  BCF    03.7
+00D5:  MOVF   00,W
+00D6:  MOVWF  21
+....................             output_c(0x01); 
+00D7:  MOVLW  00
+00D8:  MOVWF  34
+00D9:  BSF    03.5
+00DA:  CLRF   07
+00DB:  MOVLW  01
+00DC:  BCF    03.5
+00DD:  MOVWF  07
+....................             output_b(x);   //# first digit up 
+00DE:  BSF    03.5
+00DF:  CLRF   06
+00E0:  BCF    03.5
+00E1:  MOVF   21,W
+00E2:  MOVWF  06
+....................             first_digit++; //# first digit up 
+00E3:  INCF   24,F
+....................             delay_ms(10); 
+00E4:  MOVLW  0A
+00E5:  MOVWF  35
+00E6:  CALL   052
+00E7:  INCF   20,F
+00E8:  GOTO   0A4
+....................          } 
+00E9:  GOTO   0A1
+....................       } 
+00EA:  GOTO   09E
 ....................        
 ....................    } 
-....................  
 .................... } 
-003A:  SLEEP
+....................  
+00EB:  SLEEP
 
 Configuration Fuses:
    Word  1: 3F32   HS NOWDT PUT NOBROWNOUT NOLVP NOCPD NOWRT NODEBUG NOPROTECT

@@ -44,13 +44,12 @@ void button_stop()
 
 void delay_stop()
 {
-   for(int z=0; z<40; z++)
+   for(i=0; i<20; i++)
    {
       delay_ms(5);
       button_stop();
-      button_down();
-      button_up();
-   } 
+   }
+   
 }
 
 void main()
@@ -77,8 +76,6 @@ void main()
             {
                overflow++;
                first_digit=0;
-               if (overflow == 10)
-               overflow = 0;
             }
             
             if(0 < overflow < 10)
@@ -86,13 +83,12 @@ void main()
                a = number[overflow];
                output_c(0x02);
                output_b(a);
-               delay_ms(10);
             }
-            
             x = number[i]; //# first digit up
             output_c(0x01);
             output_b(x);   //# first digit up
             first_digit++; //# first digit up
+           
             delay_stop();  // delay stop function
          }
       }

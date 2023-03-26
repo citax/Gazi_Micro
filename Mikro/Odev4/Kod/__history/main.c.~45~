@@ -42,16 +42,6 @@ void button_stop()
    }
 }
 
-void delay_stop()
-{
-   for(int z=0; z<40; z++)
-   {
-      delay_ms(5);
-      button_stop();
-      button_down();
-      button_up();
-   } 
-}
 
 void main()
 {
@@ -89,11 +79,12 @@ void main()
                delay_ms(10);
             }
             
+      
             x = number[i]; //# first digit up
             output_c(0x01);
             output_b(x);   //# first digit up
             first_digit++; //# first digit up
-            delay_stop();  // delay stop function
+            delay_ms(20);
          }
       }
       
