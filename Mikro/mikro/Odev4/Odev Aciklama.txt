@@ -1,0 +1,18 @@
+Mikro Odev
+
+--Odev 1--
+
+0dan 99a kadar 3 butonlu 
+biri azaltma biri artirma biri durdurma 200ms araliklarla
+2 transistor
+3 buton
+RA4 kullanmayacaksin
+
+--Odev 2--
+
+0dan 999a kadar sayan
+
+--Odev 3--
+
+
+

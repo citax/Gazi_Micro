@@ -19,8 +19,9 @@
 029     stop
 02A-033 number
 034     @TRIS_C
-035     @delay_ms2.P1
+035     delay_stop.z
 035     MAIN.@SCRATCH1
+036     @delay_ms2.P1
 077     @SCRATCH
 078     @SCRATCH
 078     _RETURN_
@@ -28,27 +29,28 @@
 07A     @SCRATCH
 09C.6   C1OUT
 09C.7   C2OUT
-10D-10E @WRITE_PROGRAM_MEMORY8.P1
-10D-10E @READ_PROGRAM_MEMORY8.P2
+10D-10E @READ_PROGRAM_MEMORY8.P1
+10D-10E @WRITE_PROGRAM_MEMORY8.P2
 
 ROM Allocation:
 000004  button_up
-00001E  button_down
-000038  button_stop
-000052  @delay_ms2
-000067  MAIN
-000067  @cinit1
-000076  @cinit2
+00001C  button_down
+000034  button_stop
+00004C  @delay_ms2
+000061  delay_stop
+000071  @cinit1
+000071  MAIN
+000080  @cinit2
 
 Project Directory:
-    E:\Okul\Mikro\mikro\Odev4\Kod\
+    C:\Users\Nikola\Documents\GitHub\Gazi_Micro\Mikro\Odev4\Kod\
 
 Project Files:
-    main.c                                                  [26-Mar-23 10:17  CRC=FA9272FB]
+    main.c                                                  [27-Mar-23 00:43  CRC=66E714E0]
     main.h                                                  [25-Mar-23 00:48  CRC=CF12E969]
-    C:\Program Files (x86)\PICC\Devices\16F877A.h           [12-Kas-13 14:35  CRC=81334808]
+    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16F877A.h [12-Kas-13 14:35  CRC=81334808]
 
-Source signature=CC0BEC74
+Source signature=38608E59
 
 Units:
     main (main)

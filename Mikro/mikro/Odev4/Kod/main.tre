@@ -1,0 +1,10 @@
+ÀÄmain
+   ÀÄMAIN  0/171  Ram=1
+      ÃÄ@cinit1  (Inline)  Ram=0
+      ÃÄbutton_up  0/24  Ram=0
+      ÃÄbutton_stop  0/38  Ram=0
+      ÃÄ@delay_ms2  0/21  Ram=1
+      ÃÄ@delay_ms2  0/21  Ram=1
+      ÃÄbutton_stop  0/38  Ram=0
+      ÃÄbutton_down  0/26  Ram=0
+      ÀÄbutton_up  0/24  Ram=0

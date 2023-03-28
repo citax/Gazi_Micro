@@ -44,7 +44,7 @@ void button_stop()
 
 void delay_stop()
 {
-   for(int z=0; z<40; z++)
+   for(int z=0; z<38; z++)
    {
       delay_ms(5);
       button_stop();
@@ -86,7 +86,7 @@ void main()
                a = number[overflow];
                output_c(0x02);
                output_b(a);
-               delay_ms(10);
+               delay_ms(20);
             }
             
             x = number[i]; //# first digit up

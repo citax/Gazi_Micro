@@ -1,0 +1,52 @@
+#include <main.h>
+#fuses HS, NOWDT, NOPROTECT 
+#use delay(clock=4000000) 
+#define start pin_A1
+#define stop  pin_A2
+int a,i = 0;
+const int digit[16]={ 0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7C, 0x07, 0x7F, 0x6F, 0x77, 0x7C, 0x39, 0x5E, 0x79, 0x71};
+
+void input_button()
+{
+    if(input(start) == 1)
+   {  
+      a++;
+      while(input(start));
+   }
+}
+void input_button_stop()
+{
+   if(input(stop) == 1)
+   {  
+      a=0;
+      while((input(stop)));
+   }
+   break;
+}
+
+void main()
+{
+   set_tris_a(0xFF);
+   set_tris_b(0x00);
+   output_b(0x00);
+  
+   while(TRUE)
+   {
+   
+   input_button();
+   input_button_stop();
+      if(a == 10)
+      {
+         input_button_stop();
+         for(i; i<17; i++)
+         {
+            
+         
+         }
+         
+      }
+   
+   }
+   
+   
+}

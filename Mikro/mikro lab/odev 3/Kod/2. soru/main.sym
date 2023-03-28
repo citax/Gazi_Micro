@@ -1,0 +1,72 @@
+004-005 @READ_PROGRAM_MEMORY8.P1
+004-005 @WRITE_PROGRAM_MEMORY8.P2
+008     PSP_DATA
+015     CCP_1_LOW
+015     CCP_1
+016     CCP_1_HIGH
+01B     CCP_2
+01B     CCP_2_LOW
+01C     CCP_2_HIGH
+020     z
+021     x
+022     y
+023     b
+024     i
+025     m
+026     n
+027     t
+028     j
+029     l
+02A     @TRIS_C
+02B     @delay_ms2.P1
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+10D-10E @READ_PROGRAM_MEMORY8.P1
+10D-10E @WRITE_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+000004  buton_start_1
+000014  buton_start_2
+000024  buton_start_3
+000034  delay_button_control
+00003B  @delay_ms2
+00004F  buton_stop
+000083  MAIN
+000083  @cinit1
+00008F  @cinit2
+
+Project Directory:
+    E:\Okul\Mikro\mikro lab\odev 3\Kod\2. soru\
+
+Project Files:
+    main.c                                                  [22-Mar-23 19:57  CRC=16605BF3]
+    main.h                                                  [22-Mar-23 17:41  CRC=64D0046D]
+    C:\Program Files (x86)\PICC\Devices\16F877.h            [12-Kas-13 14:35  CRC=ADB5114D]
+
+Source signature=D69A82FA
+
+Units:
+    main (main)
+
+Compiler Settings:
+    Processor:      PIC16F877
+    Pointer Size:   16
+    ADC Range:      0-65535
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    XREF file:   main.xsym
+    Errors:      main.err
+    Ext Symbols: main.esym
+    INHX8:       main.hex
+    Symbols:     main.sym
+    List:        main.lst
+    Debug/COFF:  main.cof
+    Project:     main.ccspjt
+    Call Tree:   main.tre
+    Statistics:  main.STA

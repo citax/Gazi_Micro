@@ -1,0 +1,370 @@
+CCS PCM C Compiler, Version 5.015, 5967               06-Mar-23 18:40
+
+               Filename:   E:\mikro lab\ödev1\Ödev 1.lst
+
+               ROM used:   250 words (3%)
+                           Largest free fragment is 2048
+               RAM used:   8 (2%) at main() level
+                           9 (2%) worst case
+               Stack used: 1 locations
+               Stack size: 8
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   019
+0003:  NOP
+.................... #include <Ödev 1.h> 
+.................... #include <16F877A.h> 
+.................... //////////// Standard Header file for the PIC16F877A device //////////////// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996, 2013 Custom Computer Services          //// 
+.................... //// This source code may only be used by licensed users of the CCS C  //// 
+.................... //// compiler.  This source code may only be distributed to other      //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction //// 
+.................... //// or distribution is permitted without written permission.          //// 
+.................... //// Derivative programs created using this software in object code    //// 
+.................... //// form are not restricted in any way.                               //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... #device PIC16F877A 
+....................  
+.................... #list 
+....................  
+.................... #device ADC=16 
+....................  
+.................... #FUSES NOWDT                 	//No Watch Dog Timer 
+.................... #FUSES NOBROWNOUT            	//No brownout reset 
+.................... #FUSES NOLVP                 	//No low voltage prgming, B3(PIC16) or B5(PIC18) used for I/O 
+....................  
+.................... #use delay(crystal=4000000) 
+....................  
+....................  
+....................  
+.................... #fuses HS, NOWDT, NOPROTECT // Denetleyici konfigürasyon ayarlarý 
+.................... #use delay(clock=4000000) // Gecikme fonksiyonu için kullanýlan 
+0004:  MOVLW  23
+0005:  MOVWF  04
+0006:  BCF    03.7
+0007:  MOVF   00,W
+0008:  BTFSC  03.2
+0009:  GOTO   018
+000A:  MOVLW  01
+000B:  MOVWF  78
+000C:  CLRF   77
+000D:  DECFSZ 77,F
+000E:  GOTO   00D
+000F:  DECFSZ 78,F
+0010:  GOTO   00C
+0011:  MOVLW  4A
+0012:  MOVWF  77
+0013:  DECFSZ 77,F
+0014:  GOTO   013
+0015:  GOTO   016
+0016:  DECFSZ 00,F
+0017:  GOTO   00A
+0018:  RETURN
+....................  // osilatör frekansý belirtiliyor 
+.................... #use fast_io(b) // Port yönlendirme komutlarý B portu için geçerli 
+.................... int i=0; // integer "i" deðiþkeni tanýmlamasý 
+....................  
+.................... /*** ANA PROGRAM ***/ 
+....................  
+.................... void main() 
+0019:  MOVF   03,W
+001A:  ANDLW  1F
+001B:  MOVWF  03
+001C:  CLRF   20
+001D:  MOVLW  FF
+001E:  MOVWF  21
+001F:  BSF    03.5
+0020:  BSF    1F.0
+0021:  BSF    1F.1
+0022:  BSF    1F.2
+0023:  BCF    1F.3
+0024:  MOVLW  07
+0025:  MOVWF  1C
+0026:  BCF    03.7
+.................... { 
+.................... setup_adc_ports(NO_ANALOGS); 
+0027:  BSF    1F.0
+0028:  BSF    1F.1
+0029:  BSF    1F.2
+002A:  BCF    1F.3
+.................... setup_adc(ADC_OFF); 
+002B:  BCF    03.5
+002C:  BCF    1F.0
+.................... setup_psp(PSP_DISABLED); 
+002D:  BSF    03.5
+002E:  BCF    09.4
+.................... setup_spi(SPI_SS_DISABLED); 
+002F:  BCF    03.5
+0030:  BCF    14.5
+0031:  BCF    21.5
+0032:  MOVF   21,W
+0033:  BSF    03.5
+0034:  MOVWF  07
+0035:  BCF    03.5
+0036:  BSF    21.4
+0037:  MOVF   21,W
+0038:  BSF    03.5
+0039:  MOVWF  07
+003A:  BCF    03.5
+003B:  BCF    21.3
+003C:  MOVF   21,W
+003D:  BSF    03.5
+003E:  MOVWF  07
+003F:  MOVLW  01
+0040:  BCF    03.5
+0041:  MOVWF  14
+0042:  MOVLW  00
+0043:  BSF    03.5
+0044:  MOVWF  14
+.................... setup_timer_0(RTCC_INTERNAL|RTCC_DIV_1); 
+0045:  MOVF   01,W
+0046:  ANDLW  C7
+0047:  IORLW  08
+0048:  MOVWF  01
+.................... setup_timer_1(T1_DISABLED); 
+0049:  BCF    03.5
+004A:  CLRF   10
+.................... setup_timer_2(T2_DISABLED,0,1); 
+004B:  MOVLW  00
+004C:  MOVWF  78
+004D:  MOVWF  12
+004E:  MOVLW  00
+004F:  BSF    03.5
+0050:  MOVWF  12
+.................... set_tris_b(0x00); // B portunun tüm pinlerini çýkýþ olarak ayarla 
+0051:  MOVWF  06
+.................... output_b(0x00); // B portunun çýkýþlarýný temizle 
+0052:  BCF    03.5
+0053:  CLRF   06
+....................  
+.................... //while dýþýnda olduðu durumlarda yalnýzca 1 kez çalýþýr ardýndan durur. 
+....................  
+.................... for(i=0; i<15; i++) 
+0054:  CLRF   20
+0055:  MOVF   20,W
+0056:  SUBLW  0E
+0057:  BTFSS  03.0
+0058:  GOTO   07D
+....................    { 
+....................       output_b(0x0F); 
+0059:  MOVLW  0F
+005A:  MOVWF  06
+....................       delay_ms(500); 
+005B:  MOVLW  02
+005C:  MOVWF  22
+005D:  MOVLW  FA
+005E:  MOVWF  23
+005F:  CALL   004
+0060:  DECFSZ 22,F
+0061:  GOTO   05D
+....................       output_b(0x00); 
+0062:  CLRF   06
+....................       delay_ms(500); 
+0063:  MOVLW  02
+0064:  MOVWF  22
+0065:  MOVLW  FA
+0066:  MOVWF  23
+0067:  CALL   004
+0068:  DECFSZ 22,F
+0069:  GOTO   065
+....................       // 
+....................       output_b(0xF0); 
+006A:  MOVLW  F0
+006B:  MOVWF  06
+....................       delay_ms(500); 
+006C:  MOVLW  02
+006D:  MOVWF  22
+006E:  MOVLW  FA
+006F:  MOVWF  23
+0070:  CALL   004
+0071:  DECFSZ 22,F
+0072:  GOTO   06E
+....................       output_b(0x00); 
+0073:  CLRF   06
+....................       delay_ms(500); 
+0074:  MOVLW  02
+0075:  MOVWF  22
+0076:  MOVLW  FA
+0077:  MOVWF  23
+0078:  CALL   004
+0079:  DECFSZ 22,F
+007A:  GOTO   076
+007B:  INCF   20,F
+007C:  GOTO   055
+....................    } 
+....................    for(i=0; i<5; i++) 
+007D:  CLRF   20
+007E:  MOVF   20,W
+007F:  SUBLW  04
+0080:  BTFSS  03.0
+0081:  GOTO   0A6
+....................    { 
+....................       output_b(0x55); 
+0082:  MOVLW  55
+0083:  MOVWF  06
+....................       delay_ms(1000); 
+0084:  MOVLW  04
+0085:  MOVWF  22
+0086:  MOVLW  FA
+0087:  MOVWF  23
+0088:  CALL   004
+0089:  DECFSZ 22,F
+008A:  GOTO   086
+....................       output_b(0x00); 
+008B:  CLRF   06
+....................       delay_ms(1000); 
+008C:  MOVLW  04
+008D:  MOVWF  22
+008E:  MOVLW  FA
+008F:  MOVWF  23
+0090:  CALL   004
+0091:  DECFSZ 22,F
+0092:  GOTO   08E
+....................       // 
+....................       output_b(0xAA); 
+0093:  MOVLW  AA
+0094:  MOVWF  06
+....................       delay_ms(1000); 
+0095:  MOVLW  04
+0096:  MOVWF  22
+0097:  MOVLW  FA
+0098:  MOVWF  23
+0099:  CALL   004
+009A:  DECFSZ 22,F
+009B:  GOTO   097
+....................       output_b(0x00); 
+009C:  CLRF   06
+....................       delay_ms(1000); 
+009D:  MOVLW  04
+009E:  MOVWF  22
+009F:  MOVLW  FA
+00A0:  MOVWF  23
+00A1:  CALL   004
+00A2:  DECFSZ 22,F
+00A3:  GOTO   09F
+00A4:  INCF   20,F
+00A5:  GOTO   07E
+....................    } 
+....................     
+....................     
+....................  while(1) 
+.................... { 
+....................  
+.................... //while içerisinde ise sonsuz döndüdedir. 
+....................  
+....................    for(i=0; i<15; i++) 
+00A6:  CLRF   20
+00A7:  MOVF   20,W
+00A8:  SUBLW  0E
+00A9:  BTFSS  03.0
+00AA:  GOTO   0CF
+....................    { 
+....................       output_b(0x0F); 
+00AB:  MOVLW  0F
+00AC:  MOVWF  06
+....................       delay_ms(500); 
+00AD:  MOVLW  02
+00AE:  MOVWF  22
+00AF:  MOVLW  FA
+00B0:  MOVWF  23
+00B1:  CALL   004
+00B2:  DECFSZ 22,F
+00B3:  GOTO   0AF
+....................       output_b(0x00); 
+00B4:  CLRF   06
+....................       delay_ms(500); 
+00B5:  MOVLW  02
+00B6:  MOVWF  22
+00B7:  MOVLW  FA
+00B8:  MOVWF  23
+00B9:  CALL   004
+00BA:  DECFSZ 22,F
+00BB:  GOTO   0B7
+....................       // 
+....................       output_b(0xF0); 
+00BC:  MOVLW  F0
+00BD:  MOVWF  06
+....................       delay_ms(500); 
+00BE:  MOVLW  02
+00BF:  MOVWF  22
+00C0:  MOVLW  FA
+00C1:  MOVWF  23
+00C2:  CALL   004
+00C3:  DECFSZ 22,F
+00C4:  GOTO   0C0
+....................       output_b(0x00); 
+00C5:  CLRF   06
+....................       delay_ms(500); 
+00C6:  MOVLW  02
+00C7:  MOVWF  22
+00C8:  MOVLW  FA
+00C9:  MOVWF  23
+00CA:  CALL   004
+00CB:  DECFSZ 22,F
+00CC:  GOTO   0C8
+00CD:  INCF   20,F
+00CE:  GOTO   0A7
+....................    } 
+....................    for(i=0; i<5; i++) 
+00CF:  CLRF   20
+00D0:  MOVF   20,W
+00D1:  SUBLW  04
+00D2:  BTFSS  03.0
+00D3:  GOTO   0F8
+....................    { 
+....................       output_b(0x55); 
+00D4:  MOVLW  55
+00D5:  MOVWF  06
+....................       delay_ms(1000); 
+00D6:  MOVLW  04
+00D7:  MOVWF  22
+00D8:  MOVLW  FA
+00D9:  MOVWF  23
+00DA:  CALL   004
+00DB:  DECFSZ 22,F
+00DC:  GOTO   0D8
+....................       output_b(0x00); 
+00DD:  CLRF   06
+....................       delay_ms(1000); 
+00DE:  MOVLW  04
+00DF:  MOVWF  22
+00E0:  MOVLW  FA
+00E1:  MOVWF  23
+00E2:  CALL   004
+00E3:  DECFSZ 22,F
+00E4:  GOTO   0E0
+....................       // 
+....................       output_b(0xAA); 
+00E5:  MOVLW  AA
+00E6:  MOVWF  06
+....................       delay_ms(1000); 
+00E7:  MOVLW  04
+00E8:  MOVWF  22
+00E9:  MOVLW  FA
+00EA:  MOVWF  23
+00EB:  CALL   004
+00EC:  DECFSZ 22,F
+00ED:  GOTO   0E9
+....................       output_b(0x00); 
+00EE:  CLRF   06
+....................       delay_ms(1000); 
+00EF:  MOVLW  04
+00F0:  MOVWF  22
+00F1:  MOVLW  FA
+00F2:  MOVWF  23
+00F3:  CALL   004
+00F4:  DECFSZ 22,F
+00F5:  GOTO   0F1
+00F6:  INCF   20,F
+00F7:  GOTO   0D0
+....................    } 
+00F8:  GOTO   0A6
+.................... } 
+.................... } 
+00F9:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F32   HS NOWDT PUT NOBROWNOUT NOLVP NOCPD NOWRT NODEBUG NOPROTECT

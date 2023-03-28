@@ -1,0 +1,22 @@
+#include <main.h>
+#fuses HS, NOWDT, NOPROTECT 
+#use delay(clock=4000000) 
+#define start 
+
+
+void main()
+{
+   set_tris_a(0xFF);
+   set_tris_b(0x00);
+   
+   if()
+   {
+   
+   }
+   
+   while(TRUE)
+   {
+      //TODO: User Code
+   }
+
+}
