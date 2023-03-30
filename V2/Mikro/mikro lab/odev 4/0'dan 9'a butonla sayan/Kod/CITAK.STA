@@ -1,0 +1,48 @@
+
+ROM used:   137/8192 (2%)
+            137/8192 (2%) including unused fragments
+
+            0.2 Average locations per line
+            4.7 Average locations per statement
+
+RAM used:   20/368 (5%) at main() level
+            20/368 (5%) worst case
+
+Stack used: 0 worst case (0 in main + 0 for interrupts)
+Stack size: 8
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   50    29 100  CITAK.c
+   10     0   0  CITAK.h
+  671     0   0  C:\Program Files (x86)\PICC\Devices\16F877A.h
+----- -----
+  731    29 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0    133  97    1   636  5.3  main
+ Inline         0             @cinit1
+
+Program metrics:
+    Functions               1
+    Statements              29
+    Comments                119
+    Volume (V)              639
+    Difficulty (D)          5.1
+    Effort to implement (E) 3288
+    Time to implement (T)   3 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   5
+    Maintainability (MI)    35
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00003     4  0  
+00004-007FF   133  1911  
+00800-00FFF     0  2048  
+01000-017FF     0  2048  
+01800-01FFF     0  2048  
+
+
+

@@ -1,0 +1,16 @@
+[PROJECT]
+Target=E:\Okul\Mikro\mikro lab\odev 4\1. soru\main.hex
+Processor_Text=PIC16F877A
+CCSVerions=5.015
+Compiler=PCM
+[Target Data]
+FileList=main.c
+[Directories]
+Include=
+[E:\Okul\Mikro\mikro lab\odev 4\1. soru\main]
+Type=4
+[mru-list]
+1=main.c
+[Units]
+Count=1
+1=main (main)

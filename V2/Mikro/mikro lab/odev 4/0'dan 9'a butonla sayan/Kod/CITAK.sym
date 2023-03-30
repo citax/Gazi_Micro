@@ -1,0 +1,62 @@
+004-005 @READ_PROGRAM_MEMORY8.P1
+004-005 @WRITE_PROGRAM_MEMORY8.P2
+008     PSP_DATA
+015     CCP_1_LOW
+015     CCP_1
+016     CCP_1_HIGH
+01B     CCP_2_LOW
+01B     CCP_2
+01C     CCP_2_HIGH
+020-029 segment
+02A     number
+02B     a
+02C     b
+02D     @TRIS_C
+02E     main.@SCRATCH1
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+09C.6   C1OUT
+09C.7   C2OUT
+10D-10E @WRITE_PROGRAM_MEMORY8.P1
+10D-10E @READ_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+000004  main
+000004  @cinit1
+000011  @cinit2
+
+Project Directory:
+    E:\Okul\Mikro\mikro lab\odev 4\0'dan 9'a butonla sayan\Kod\
+
+Project Files:
+    CITAK.c                                                 [29-Mar-23 21:55  CRC=BCBC4629]
+    CITAK.h                                                 [29-Mar-23 21:06  CRC=CF12E969]
+    C:\Program Files (x86)\PICC\Devices\16F877A.h           [12-Kas-13 14:35  CRC=81334808]
+
+Source signature=8E35BFA2
+
+Units:
+    CITAK (main)
+
+Compiler Settings:
+    Processor:      PIC16F877A
+    Pointer Size:   16
+    ADC Range:      0-65535
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    XREF file:   CITAK.xsym
+    Errors:      CITAK.err
+    Ext Symbols: CITAK.esym
+    INHX8:       CITAK.hex
+    Symbols:     CITAK.sym
+    List:        CITAK.lst
+    Debug/COFF:  CITAK.cof
+    Project:     CITAK.ccspjt
+    Call Tree:   CITAK.tre
+    Statistics:  CITAK.STA

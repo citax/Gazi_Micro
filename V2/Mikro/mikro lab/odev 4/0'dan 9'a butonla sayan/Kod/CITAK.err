@@ -1,0 +1,5 @@
+>>> Warning 202 "CITAK.c" Line 9(12,13): Variable never used:   a
+>>> Warning 202 "CITAK.c" Line 9(14,15): Variable never used:   b
+      Memory usage:   ROM=2%      RAM=5% - 5%
+      0 Errors,  2 Warnings.
+Build Successful.

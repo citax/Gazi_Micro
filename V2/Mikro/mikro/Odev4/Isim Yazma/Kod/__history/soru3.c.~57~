@@ -1,0 +1,76 @@
+#include <soru3.h>
+#fuses XT,NOWDT,NOPROTECT
+#use delay(clock=4000000)
+#use fast_io(a)
+#use fast_io(b)
+#define isim pin_A0
+#define numara pin_A1
+#define durdur pin_A2
+int A[]={0x03, 0x75, 0x76,0x75, 0x03}; 
+int N[]={0x00,0X04,0X08,0x10,0X00};
+int U[]={0x00, 0x40, 0x40, 0x40, 0x00}; 
+int D[]={0x00,0x3E, 0x3E, 0x3E, 0x41}; 
+int E[]={0x00, 0xB6, 0xB6, 0xB6, 0xBE}; 
+int R[]={0x7f,0x48,0x4c,0x4A,0x31}; 
+
+int sutunsec (int s) 
+{ switch (s)
+   { 
+      case 0: return (0x10); break;
+      case 1: return (0x08); break; 
+      case 2: return (0x04); break;
+      case 3: return (0x02); break;
+      case 4: return (0x01); break;
+
+   }
+}
+
+
+void durdur_res()
+{
+
+   if(input(durdur))
+      {
+         output_b(0x00);
+         output_d(0x00);
+         break;
+      }
+      
+}
+
+void matris_karakter_gonder (char harf[], int tekrar)
+{
+   int i,j; 
+      for (i=1;i<tekrar;i++) 
+         {
+         for(j=0;j<5;j++) 
+            {
+               output_c(sutunsec(j)); 
+               output_b(harf[j]);
+               delay_ms(10);
+            }
+         }
+}
+
+
+void main()
+{
+set_tris_a(0x07);
+set_tris_b(0x00); 
+set_tris_d(0x00); 
+output_b(0x00);
+output_d(0x00);
+   while(TRUE)
+   
+    {
+      if(input(isim))
+      {
+        // matris_karakter_gonder (E, 25); 
+        // matris_karakter_gonder (D,25);
+         matris_karakter_gonder (A, 25); 
+        // matris_karakter_gonder (N,25); 
+        // matris_karakter_gonder (U,25);
+         //matris_karakter_gonder (R,25);
+      }
+   }
+}

@@ -1,0 +1,156 @@
+#include <soru3.h>
+#fuses XT,NOWDT,NOPROTECT
+#use delay(clock=4000000)
+#use fast_io(a)
+#use fast_io(b)
+#define isim pin_A0
+#define numara pin_A1
+#define durdur pin_A2
+
+int a,b;
+
+
+void durdur_res()
+{
+
+   if(input(durdur))
+      {
+         output_b(0x00);
+         output_d(0x00);
+         break;
+      }
+      
+}
+
+
+
+void main()
+{
+set_tris_a(0x07);
+set_tris_b(0x00);
+output_b(0x00);
+output_low(D1);
+output_low(D2);
+   while(TRUE)
+   {
+   
+   if(input(arttir))
+         a=1;
+      
+    While(a==1)  
+    
+      {
+          if(sayi==100)
+          sayi=0;
+          birler=sayi%10;
+          onlar=sayi/10;
+          sayi++;
+
+          output_high(D1);
+          output_b(digit[birler]);
+          delay_ms(10);
+          output_low(D1);
+          output_high(D2);
+          output_b(digit[onlar]);
+          delay_ms(10);
+          output_low(D2);       
+          
+          
+          if(input(durdur))
+          durdur_res();
+           
+        if(input(azalt))
+         b=1;
+      
+        While(b==1)  
+    
+         {
+         
+          if(sayi==0)
+          sayi=99;
+          
+          birler=sayi%10;
+          onlar=sayi/10;
+          sayi--;
+      
+      
+
+ 
+          output_high(D1);
+          output_b(digit[birler]);
+          delay_ms(10);
+          output_low(D1);
+          output_high(D2);
+          output_b(digit[onlar]);
+          delay_ms(10);
+          output_low(D2);
+          
+          if(input(durdur))
+          durdur_res();
+
+ 
+         }
+       }
+       
+       
+       
+        if(input(azalt))
+         b=1;
+      
+        While(b==1)  
+    
+         {
+         
+          if(sayi==0)
+          sayi=99;
+          
+          birler=sayi%10;
+          onlar=sayi/10;
+          sayi--;
+      
+      
+
+ 
+          output_high(D1);
+          output_b(digit[birler]);
+          delay_ms(10);
+          output_low(D1);
+          output_high(D2);
+          output_b(digit[onlar]);
+          delay_ms(10);
+          output_low(D2);
+          
+          if(input(durdur))
+          durdur_res();
+
+
+if(input(arttir))
+         a=1;
+      
+    While(a==1)  
+    
+      {
+          if(sayi==100)
+          sayi=0;
+          birler=sayi%10;
+          onlar=sayi/10;
+          sayi++;
+
+          output_high(D1);
+          output_b(digit[birler]);
+          delay_ms(10);
+          output_low(D1);
+          output_high(D2);
+          output_b(digit[onlar]);
+          delay_ms(10);
+          output_low(D2);       
+          
+          
+          if(input(durdur))
+          durdur_res();
+      }
+ 
+         }
+         
+      }
+    }
