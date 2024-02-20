@@ -1,0 +1,41 @@
+[PROJECT]
+Target=Timer0 Uygulamasý-1.hex
+Processor_Text=PIC16F877
+CCSVersion=5.049
+Compiler=PCM
+[Target Data]
+FileList=Timer0 Uygulamasý-1.c
+[Timer0 Uygulamasý-1.c]
+Type=4
+[mru-list]
+1=Timer0 Uygulamasý-1.c
+
+[defines]
+buildcount=2
+
+[ProjectLog]
+Days=1
+D1=14-04-2022
+D1_L=6
+D1_L1=[79338]Stopped Editing.
+D1_L2=[79663]Started Editing.
+D1_L3=[79966]Stopped Editing.
+TotalEdit=26
+TotalDebug=0
+D1_E=26
+D1_D=0
+D1_L4=[80001]Started Editing.
+D1_L5=[80159]Stopped Editing.
+D1_L6=[80185]Project Closed.
+
+[Opened Files]
+1=..\Yürüyen Iþýk Uygulamasý\Yürüyen ýþýk uygulamasý.c
+t1=25
+2=..\..\..\..\TIMER1\Timer1..c
+t2=25
+Count=3
+3=..\..\..\..\týmer1_odev\týmer1_odev.c
+t3=1
+[Units]
+Count=1
+1=Timer0 Uygulamasý-1 (main)

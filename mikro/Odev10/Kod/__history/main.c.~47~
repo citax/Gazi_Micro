@@ -1,0 +1,50 @@
+#include <16f877a.h>
+#device ADC=8
+#use delay(clock=4000000)
+#fuses XT,NOWDT,NOPUT,NOLVP,NOCPD,NOPROTECT
+#define use_portb_lcd TRUE
+#include <lcd.c>
+
+long int adc_bilgi;
+float adc_voltaj;
+long int oran; 
+
+void main()
+{
+   set_tris_a(0xff);
+   set_tris_b(0x00);
+   set_tris_c(0x00);
+   output_c(0x00);
+   
+   setup_adc(adc_clock_div_32);
+   setup_adc_ports(ALL_ANALOG);
+   
+   setup_ccp1(CCP_PWM);
+   setup_timer_2(T2_DIV_BY_16,255,1);
+   
+   
+   lcd_init();
+   printf(lcd_putc,"Starting...");
+   set_adc_channel(0);
+   delay_us(50);
+   
+   while(true)
+   {
+      adc_bilgi = read_adc();
+      adc_voltaj = 0.01953125 * adc_bilgi;
+      oran = (adc_bilgi*100) / 255 ;
+      set_pwm1_duty(adc_bilgi);
+      printf(lcd_putc, "\fADC Bilgi= %ld", adc_bilgi);
+      printf(lcd_putc,"\nHiz = %ld", oran);
+      output_high(pin_c3);
+      output_low(pin_c4);
+      if(oran > 80)
+      {
+         output_low(pin_c3);
+         output_low(pin_c4);
+         printf(lcd_putc,"\fHIZ ASILDI!");
+         printf(lcd_putc,"\nHiz = %ld", oran);
+      }
+      delay_ms(50);
+   }
+}

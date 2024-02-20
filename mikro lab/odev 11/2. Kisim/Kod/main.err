@@ -1,0 +1,7 @@
+>>> Warning 203 "main.c" Line 76(1,1): Condition always TRUE
+>>> Warning 202 "main.c" Line 13(5,14): Variable never used:   start_pin
+>>> Warning 202 "main.c" Line 13(17,25): Variable never used:   stop_pin
+>>> Warning 202 "main.c" Line 18(5,9): Variable never used:   adim
+      Memory usage:   ROM=2%      RAM=5% - 5%
+      0 Errors,  4 Warnings.
+Build Successful.

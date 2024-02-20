@@ -1,0 +1,22 @@
+[PROJECT]
+Target=1.soru.hex
+Processor_Text=PIC16F877A
+CCSVerions=5.015
+Compiler=PCM
+CCSVersion=5.015
+[Target Data]
+FileList=1.soru.c
+[Directories]
+Include=C:\Program Files (x86)\PICC\Devices\;C:\Program Files (x86)\PICC\Drivers\
+[C:\Users\edaoz\Desktop\mikrolab\2.deney\1.soru\1.soru]
+Type=4
+[mru-list]
+1=1.soru.c
+[Opened Files]
+1=1.soru.c
+2=
+[1.soru.c]
+Type=4
+[Units]
+Count=1
+1=1.soru (main)

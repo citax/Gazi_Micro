@@ -1,0 +1,47 @@
+#include <main.h>
+
+#fuses XT, NOWDT,NOPROTECT
+#use delay(clock=4000000)
+#include <lcd420.c> 
+#define ileri1 pin_a0
+#define geri1 pin_a1
+#define ileri2 pin_a2
+#define geri2 pin_a3
+#define in1   pin_d0
+#define in2   pin_d1
+#define in3   pin_d4
+#define in4   pin_d5
+void main()
+{
+   set_tris_a(0xFF);
+   set_tris_b(0x00);
+   set_tris_d(0x00);
+   output_b(0x00);
+   output_d(0x00);
+   lcd_init();
+   
+   while(TRUE)
+   {
+      printf(lcd_putc, "\f slm");
+      delay_ms(1000);
+      
+         if(input(ileri1))
+         { 
+           output_high(pin_d2);
+           output_low(pin_d3);
+           output_high(in1);
+           output_low(in2);
+         }
+         
+         
+          if(input(geri1))
+         { 
+           output_high(pin_d2);
+           output_low(pin_d3);
+           output_low(in1);
+           output_high(in2);
+         }
+
+}
+}
+

@@ -1,0 +1,33 @@
+#include <16f877A.h>
+#use delay(clock = 4000000)
+#include <lcd.c>
+#byte portc=0x07
+
+int keys[] = {1,2,3,0,4,5,6,0,7,8,9,0,0xF,0,0xF,0};
+
+
+#int_ext
+void dis_kesme()
+{
+    printf(lcd_putc,"\f%d",keys[portc]);
+}
+
+
+void main()
+{
+   set_tris_b(0x01);
+   set_tris_c(0xF0);
+   set_tris_d(0x00);
+   
+   ext_int_edge(L_TO_H);
+   enable_interrupts(INT_EXT);
+   enable_interrupts(GLOBAL);
+   lcd_init();
+   printf(lcd_putc,"Hello");
+   
+   while(TRUE)
+   {
+      
+   }
+
+}

@@ -1,0 +1,65 @@
+#include <main.h>
+
+#fuses XT,NOWDT
+#use delay (clock=4000000)
+#use fast_io(c)
+#use fast_io(e)
+#define use_portb_lcd FALSE
+#include <lcd.c>
+
+#INT_AD
+void ADC_kesme()
+   {
+      output_high(pin_c5);
+      delay_ms(200);
+      output_low(pin_c5);
+   }
+   
+unsigned long int bilgi1,bilgi2,bilgi3 ;
+float V,I,P,q;
+
+void main()
+{
+set_tris_d(0x00);
+set_tris_c(0x00);
+set_tris_e(0x0F);
+output_c(0x00);
+
+setup_adc(adc_clock_div_32);
+setup_adc_ports(ALL_ANALOG);
+enable_interrupts(INT_AD);
+enable_interrupts(GLOBAL);
+
+lcd_init();
+printf(lcd_putc,"\f ADC UYGULAMASI ");
+delay_ms(1500);
+
+
+
+   while(TRUE)
+   {
+      set_adc_channel(5);
+      delay_us(20);
+      bilgi1=read_adc();
+      V=0.0048828125*bilgi1; 
+      set_adc_channel(6);
+      delay_us(20);
+      bilgi2=read_adc();
+      I=0.0048828125*bilgi2; 
+      set_adc_channel(7);
+      delay_us(20);
+      bilgi3=read_adc();
+      q=0.0048828125*bilgi3;
+      P=V*I*q;  
+      lcd_gotoxy(1,1);
+      lcd_putc("\fP=%f",P);
+      lcd_gotoxy(1,2);
+      printf(lcd_putc,"V=%f",V);
+      lcd_gotoxy(1,3);
+      printf(lcd_putc,"I=%f",i);
+      lcd_gotoxy(1,4);
+      printf(lcd_putc,"q=%f",q);
+      delay_ms(2500);
+   }
+
+}

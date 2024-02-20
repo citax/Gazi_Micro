@@ -1,0 +1,91 @@
+#include <16f877A.h>
+#fuses HS,NOWDT,NOPROTECT
+#use delay(clock=4000000)
+
+#define button_start_stop pin_A3
+#define button_way        pin_A2
+#define button_speed_up   pin_A1
+#define button_speed_down pin_A0
+
+const int digit[4] = {0x03, 0x06 , 0x0C, 0x09};
+
+
+int start_pin=0,stop_pin=1;
+int start;
+int way;
+int speed;
+int x = 0;
+int adim = 0;
+int a, i, k;
+
+void start_stop()
+{
+   x = input(button_start_stop);
+   if(input(button_start_stop) != x )
+   {
+      if(start == 1)
+      {
+         start = 0;
+      }
+      else
+      {
+         start = 1;
+      }
+   }
+
+}
+
+void delay_button()
+{  
+   for(k=0; k<10; k++)
+   {
+      start_stop();
+      delay_ms(10);
+   }
+}
+
+/*
+void change_way()
+{
+   x = input(button_way);
+   if(input(button_start_stop) != x )
+   {
+      if(start == 1)
+      {
+         start = 0;
+      }
+      else
+      {
+         start = 1;
+      }
+   }
+
+}
+*/
+
+void main()
+{
+   set_tris_a(0xff);
+   set_tris_c(0x00);
+   output_c(0x00);
+   
+while(1)
+{ 
+   start_stop();
+   while(start == 1)
+   {
+      start_stop();
+      for(a=0; a<2; a++)
+      {  
+         i = (a+1)%4;
+         output_c(digit[i]);
+         delay_button();
+         if(start == 0)
+         break;
+         
+      }
+   
+   }
+}
+
+}

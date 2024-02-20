@@ -1,0 +1,82 @@
+#include <16f877a.h>
+#device ADC=8
+#use delay(clock=4000000)
+#fuses XT,NOWDT,NOPUT,NOLVP,NOCPD,NOPROTECT
+#define use_portb_lcd TRUE
+#use fast_io(a)
+#use fast_io(b)
+#use fast_io(c)
+#include <lcd.c>
+
+#INT_AD
+void adc_kesme()
+{
+
+output_high(pin_c2);
+delay_ms(20);
+output_low(pin_c2);
+}
+
+
+
+unsigned int bilgi;
+float voltaj;
+void main()
+   {
+      setup_psp(PSP_DISABLED);
+      setup_timer_1(T1_DISABLED);
+      setup_adc_ports(ALL_ANALOG);
+      setup_timer_2(T2_DIV_BY_16,255,1);
+      setup_CCP1(CCP_PWM);
+      setup_CCP2(CCP_OFF);
+      set_pwm1_duty(0);
+      set_pwm2_duty(0);
+      setup_adc(adc_clock_div_32);
+     
+      set_tris_a(0x20);//0b00100000
+      set_tris_b(0x00);
+      set_tris_c(0x00);
+      
+      set_adc_channel(4);
+      delay_us(20);
+      
+      output_c(0x00);
+      
+      enable_interrupts(INT_AD);
+      enable_interrupts(GLOBAL);
+      lcd_init();
+      printf(lcd_putc,"\fDC Motor\nHiz Bilgi");
+      delay_ms(300);
+ 
+    while(true)
+     {
+         
+         
+         bilgi=read_adc();
+         delay_us(20);
+         
+         if(bilgi<=150)
+        {
+         
+         voltaj=bilgi/51.0;// 5V'TA 255 ÝSE VOLTAJ DEGERÝNÝ ELDE ETMEK ÝÇÝN 51 E BÖLMEK GEREK
+      
+         set_pwm1_duty(bilgi);
+         output_high(pin_c3);
+         output_low(pin_c4);
+         
+         
+         printf(lcd_putc,"\fVoltaj=%f V",voltaj);
+         lcd_gotoxy(1,2);
+         printf(lcd_putc,"bilgi=%u",bilgi);
+         delay_ms(1000);
+         
+        }  
+        
+         else
+         {
+          set_pwm1_duty(0);
+          printf(lcd_putc,"\fuyari,hizi asildi!");
+         
+         }
+     }
+   }

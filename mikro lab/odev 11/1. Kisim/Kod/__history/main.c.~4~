@@ -1,0 +1,27 @@
+#include <16f877A.h>
+#fuses HS,NOWDT,NOPROTECT
+#use delay(clock=4000000)
+
+#define buton1 pin_A0
+#define buton2 pin_A1
+
+const int digit[4]={0x03, 0x06, 0x0C, 0x09};
+
+
+
+void main()
+{ 
+ set_tris_a(0xff);
+ set_tris_d(0x00); 
+ output_d(0x00); 
+ delay_ms(10);
+ 
+while(1)
+{ 
+   
+ 
+}
+
+}
+
+

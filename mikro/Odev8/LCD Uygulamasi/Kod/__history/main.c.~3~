@@ -1,0 +1,49 @@
+#include <main.h>
+
+#fuses HS, NOWDT //Sigortalar belirtiliyor.
+#use delay (clock=4000000) // Gecikme fonksiyonu için kullanilacak
+ // osilatör frekansi belirtiliyor.
+#use fast_io(a) //Port yönlendirme komutlari A portu için geçerli
+#use fast_io(b) //Port yönlendirme komutlari B portu için geçerli
+#include <lcd.c> // lcd kütüphane dosyasi tanitiliyor
+#define buton pin_a0 // buton ifadesi pin_a2 ifadesine esitleniyor
+int x,i=0; // Tamsayi tipinde degiskenler tanimlaniyor
+float y,z; // Ondalikli tipte degiskenler tanimlaniyor
+void main ( )
+{
+ set_tris_a(0x01); // RA0 pini giris tanitiliyor
+ set_tris_b(0x00); // B portu komple çikis tanitiliyor
+ lcd_init(); // LCD hazirlaniyor
+x=100; // x degiskenine deger veriliyor
+ y=32.67; // y degiskenine deger veriliyor
+
+printf(lcd_putc,"\f EE_304 Mikro Lab "); // LCD'ye veri gönderiliyor.
+delay_ms(2000); // 2 sn gecikme
+printf(lcd_putc,"\nDersi Uygulamasi");
+delay_ms(2000); // 2 sn gecikme
+printf(lcd_putc,"\f X =%d Y =%f",x,y); // LCD'de tamsayi olarak x
+//degiskeni ve float olarak y degiskeni degeri görüntüleniyor.
+delay_ms(2000); // 2 sn gecikme
+z=x*y; // z degiskeni x ve y nin çarpimi ile bulunuyor.
+printf(lcd_putc,"\n Z =%f",z); // LCD'de ondalikli olarak z
+// degisken degeri görüntüleniyor.
+ delay_ms(4000); // 4 sn gecikme
+ printf(lcd_putc,"\f RA0 BUTONUNA ");
+ delay_ms(1000); // 1 sn gecikme
+ printf(lcd_putc,"\n BASINIZ ");
+ delay_ms(1000); // 1 sn gecikme
+
+ while(1)
+ {
+ if (input(buton)) // RA0 butonuna basildi ise
+ { printf(lcd_putc,"\fZAMAN HIZLA");
+ printf(lcd_putc,"\nAKIYOR->");
+ for(;;)
+ {
+ lcd_gotoxy(2,9); // 2. satir 9. sütüna git
+ printf(lcd_putc,"%03u",i++); // i degerini 2. satir 9. sütüna yaz ve 1 artir
+ delay_ms(300); // 300 ms bekle
+ }
+ }
+ }
+}

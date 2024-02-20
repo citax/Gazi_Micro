@@ -1,0 +1,75 @@
+#include <main.h>
+#fuses XT,NOWDT,NOPROTECT
+#use delay(clock = 4000000)
+#define use_portb_lcd TRUE
+#include <lcd.c>
+int a,b,c,d = 0;
+int i,number;
+
+void button_name()
+{
+   if(input(pin_A0))
+   {
+      a=1;
+      b,c=0;
+      while(input(pin_A0));
+   }
+}
+
+void button_counter()
+{
+   if(input(pin_A1))
+   {
+      b=1;
+      a,c=0;
+      while(input(pin_A1));
+   }
+}
+
+void button_reset()
+{
+   if(input(pin_A2))
+   {
+      c=1;
+      b,a=0;
+      while(input(pin_A2));
+   }
+}
+
+
+void main()
+{
+   set_tris_b(0x00);
+   lcd_init();
+   printf(lcd_putc,"\f Butona Basiniz!",);
+   
+   while(TRUE)
+   {     
+        button_name();
+        button_counter();
+        button_reset();
+        
+        if(input(pin_A2))
+        {
+        printf(lcd_putc,"\f"); 
+        lcd_send_byte(0,0x0d);
+        }
+        
+        if(input(pin_A1))
+        {
+        printf(lcd_putc,"\fAhmet CITAK");   
+        delay_ms(200);
+        printf(lcd_putc,"\n201803010");
+        }
+        
+        if(a==0 && b==1)
+        {
+        if(number==100)
+        number=0;
+        number++;
+        printf(lcd_putc,"\f sayi= %d",number);
+        delay_button();
+        }
+   }
+
+}

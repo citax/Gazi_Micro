@@ -1,0 +1,43 @@
+#include <16f877A.h>
+#fuses HS,NOWDT,NOPROTECT
+#use delay(clock=4000000)
+
+#define button_start_stop pin_A3
+#define button_way        pin_A2
+#define button_speed_up   pin_A1
+#define button_speed_down pin_A0
+
+const int ileri_digit[4] = {0x03, 0x06 , 0x0C, 0x09};
+const int geri_digit[4]  = {0x09, 0x0C ,0x06 , 0x03};
+
+int start=0,stop=1;
+int way;
+int speed;
+
+void start_stop()
+{
+   if(input(button_start_stop))
+   {
+      if()
+      {
+      
+      }
+      
+   }
+
+}
+
+void main()
+{
+   set_tris_a(0xff);
+   set_tris_c(0x00);
+   output_c(0x00);
+   
+while(1)
+{ 
+   
+   
+   
+}
+
+}

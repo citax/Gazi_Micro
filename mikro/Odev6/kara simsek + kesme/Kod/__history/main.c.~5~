@@ -1,0 +1,16 @@
+#include <main.h>
+#fuses HS, NOWDT, NOPROTECT 
+#use delay(clock=4000000)
+#define pin_start pin_B1
+
+
+void main()
+{  
+   set_tris_b(0x00);
+   
+   while(TRUE)
+   {
+      output_high(pin_start);
+   }
+
+}

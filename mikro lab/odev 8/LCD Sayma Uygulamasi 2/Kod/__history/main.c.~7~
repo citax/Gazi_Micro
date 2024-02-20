@@ -1,0 +1,29 @@
+#include <main.h>
+#fuses XT,NOWDT,NOPROTECT
+#use delay(clock = 4000000)
+#define use_portb_lcd TRUE
+#include <lcd.c>
+int number,up,down = 0;
+
+void up()
+{
+   if(input(pin_A0))
+   {
+      up=1;
+      while(input(pin_A0));
+   }
+   
+}
+
+void main()
+{
+   set_tris_b(0x00);
+   lcd_init();
+  
+   while(TRUE)
+   {  
+        lcd_send_byte(0,0x0d);
+        printf(lcd_putc,"\fEDAYI COK SEVIYORUM");   //TODO: User Code
+   }
+
+}

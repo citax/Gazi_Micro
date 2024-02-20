@@ -1,0 +1,23 @@
+#include <main.h>
+#fuses XT,NOWDT,NOPROTECT
+#use delay(clock = 4000000)
+#include <lcd.c>
+
+
+
+
+
+
+void main()
+{
+   set_tris_b(0x00);
+   lcd_init();
+   
+   
+   
+   while(TRUE)
+   {
+        printf(lcd_putc,"EDAYI COK SEVIYORUM");   //TODO: User Code
+   }
+
+}

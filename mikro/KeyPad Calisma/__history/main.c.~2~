@@ -1,0 +1,15 @@
+#include <16f877A.h>
+#use delay(clock = 4000000)
+#include <lcd.c>
+
+
+
+void main()
+{
+
+   while(TRUE)
+   {
+      //TODO: User Code
+   }
+
+}

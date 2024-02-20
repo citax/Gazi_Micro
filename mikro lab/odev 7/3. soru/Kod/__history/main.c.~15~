@@ -1,0 +1,101 @@
+#include <main.h>
+#fuses HS, NOWDT, NOPROTECT 
+#use delay(clock=4000000)
+#define pin_start pin_A0
+#define pin_stop pin_A1
+#define pin_led pin_B1
+int start,stop= 0;
+int led = 0x01;
+
+#int_ext
+
+void interrupt()
+{
+   output_high(pin_led);
+   delay_ms(1000); 
+   output_low(pin_led); 
+   delay_ms(3000);
+
+   for (int t=0;t<6;t++)
+   {
+      output_high(pin_led); 
+      delay_ms(500);
+      output_low(pin_led);
+      delay_ms(500);
+   }  
+}
+
+void start_f()
+{  
+   if(input(pin_start) && !input(pin_stop))
+   {
+      start = 1;
+      stop = 0;
+   }
+}
+
+void stop_f()
+{  
+   if(!input(pin_start) && input(pin_stop))
+   {
+      start = 0;
+      stop = 1;
+      led = 0x01;
+   }
+   if(stop == 1)
+   break;
+}
+
+
+void main()
+{  
+   set_tris_a(0xFF);  
+   set_tris_b(0x01);
+   set_tris_d(0x00);
+   output_d(0x00);
+   
+   ext_int_edge(H_TO_L);
+   enable_interrupts(INT_EXT);
+   enable_interrupts(GLOBAL);
+   
+   
+   while(TRUE)
+   {
+      start_f();
+      stop_f();
+      
+      while(start == 1)
+      {
+         for(int i=0 ; i<7 ; i++)
+         {  
+            output_d(led);
+            led = led << 1 ;
+            for(int k = 0; k<20; k++)
+            {
+               stop_f();
+               delay_ms(5);
+            }
+            if(stop == 1)
+            break;
+         }
+         if(stop == 1)
+         break;
+         stop_f();
+         for(int y =0; y<7; y++)
+         {
+            output_d(led);
+            led = led >> 1 ;
+            for(int k = 0; k<20; k++)
+            {
+               stop_f();
+               delay_ms(5);  
+            }
+            if(stop == 1)
+            break;
+         }
+         
+      }
+      
+   }
+
+}

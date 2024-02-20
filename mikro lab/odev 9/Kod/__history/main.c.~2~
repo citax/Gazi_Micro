@@ -1,0 +1,58 @@
+
+#include <16f877a.h>
+#device ADC=10  
+#fuses XT,NOWDT,NOPROTECT,NOBROWNOUT,NOLVP,NOPUT,NOWRT,NODEBUG,NOCPD
+#use delay (clock=4000000)
+#use fast_io(a)
+#define use_portb_lcd TRUE
+#include <lcd.c>
+
+unsigned long int bilgi; 
+float voltaj,sicaklik;
+
+void main()
+{
+   set_tris_a(0x01);  
+   set_tris_d(0x00);
+   
+   setup_adc(adc_clock_div_32);  
+   setup_adc_ports(AN0);
+
+   lcd_init(); 
+
+   set_adc_channel(0);  
+   delay_us(20); 
+
+   printf(lcd_putc,"\fSicaklik="); 
+   
+   while(1)  
+   {
+      bilgi=read_adc(); 
+      voltaj=(0.0048828125*bilgi);
+
+      sicaklik=(voltaj*100); 
+      lcd_gotoxy(1,10);
+      printf(lcd_putc,"\f%5.1f'C",sicaklik); 
+      delay_ms(100);  
+      
+      if(22<=sicaklik<25)
+      {  
+         printf(lcd_putc,"\f%5.1f'C",sicaklik); 
+         printf(lcd_putc,"\n1.KADEME SOGUTMA");
+         output_high(pin_D1);
+      }
+      if(25<=sicaklik<28)
+      {
+         printf(lcd_putc,"\f%5.1f'C",sicaklik); 
+         printf(lcd_putc,"\n2.KADEME SOGUTMA");
+         output_high(pin_D2);
+      }
+      if(28<=sicaklik<31)
+      {
+         printf(lcd_putc,"\f%5.1f'C",sicaklik); 
+         printf(lcd_putc,"\n3.KADEME SOGUTMA");
+         output_high(pin_D3);
+      }
+   }
+
+}

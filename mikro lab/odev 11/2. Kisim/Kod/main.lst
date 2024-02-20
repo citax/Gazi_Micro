@@ -1,0 +1,331 @@
+CCS PCM C Compiler, Version 5.015, 5967               28-May-23 23:33
+
+               Filename:   E:\Okul\Mikroislemci\mikro lab\odev 11\2. Kisim\Kod\main.lst
+
+               ROM used:   195 words (2%)
+                           Largest free fragment is 2048
+               RAM used:   18 (5%) at main() level
+                           18 (5%) worst case
+               Stack used: 2 locations
+               Stack size: 8
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   073
+0003:  NOP
+.................... #include <16f877A.h> 
+.................... //////////// Standard Header file for the PIC16F877A device //////////////// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996, 2013 Custom Computer Services          //// 
+.................... //// This source code may only be used by licensed users of the CCS C  //// 
+.................... //// compiler.  This source code may only be distributed to other      //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction //// 
+.................... //// or distribution is permitted without written permission.          //// 
+.................... //// Derivative programs created using this software in object code    //// 
+.................... //// form are not restricted in any way.                               //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... #device PIC16F877A 
+0004:  BCF    0A.0
+0005:  BCF    0A.1
+0006:  BCF    0A.2
+0007:  ADDWF  02,F
+0008:  RETLW  03
+0009:  RETLW  06
+000A:  RETLW  0C
+000B:  RETLW  09
+....................  
+.................... #list 
+....................  
+.................... #fuses HS,NOWDT,NOPROTECT 
+.................... #use delay(clock=4000000) 
+*
+0057:  MOVLW  2C
+0058:  MOVWF  04
+0059:  BCF    03.7
+005A:  MOVF   00,W
+005B:  BTFSC  03.2
+005C:  GOTO   06B
+005D:  MOVLW  01
+005E:  MOVWF  78
+005F:  CLRF   77
+0060:  DECFSZ 77,F
+0061:  GOTO   060
+0062:  DECFSZ 78,F
+0063:  GOTO   05F
+0064:  MOVLW  4A
+0065:  MOVWF  77
+0066:  DECFSZ 77,F
+0067:  GOTO   066
+0068:  GOTO   069
+0069:  DECFSZ 00,F
+006A:  GOTO   05D
+....................  
+.................... #define button_start_stop PIN_A3 
+.................... #define button_way        PIN_A2 
+.................... #define button_speed_up   PIN_A0 
+.................... #define button_speed_down PIN_A1 
+....................  
+.................... const int digit[4] = {0x03, 0x06 , 0x0C, 0x09}; 
+....................  
+....................  
+.................... int start_pin=0,stop_pin=1; 
+.................... int start = 0; 
+.................... int way = 0; 
+.................... int speed = 10; 
+.................... int x = 0; 
+.................... int adim = 0; 
+.................... int a, i, k, u; 
+....................  
+.................... void start_stop() 
+.................... { 
+....................    if(input(button_start_stop)) 
+*
+000C:  BSF    03.5
+000D:  BSF    05.3
+000E:  BCF    03.5
+000F:  BTFSS  05.3
+0010:  GOTO   013
+....................    x += 1; 
+0011:  MOVLW  01
+0012:  ADDWF  25,F
+....................    while(input(button_start_stop)); 
+0013:  BSF    03.5
+0014:  BSF    05.3
+0015:  BCF    03.5
+0016:  BTFSC  05.3
+0017:  GOTO   013
+....................    start = x % 2; 
+0018:  MOVF   25,W
+0019:  ANDLW  01
+001A:  MOVWF  22
+....................    // start = 0 ise durdurma olacak strat = 1 ise baslatma 
+....................    if(start == 10) 
+001B:  MOVF   22,W
+001C:  SUBLW  0A
+001D:  BTFSC  03.2
+....................    start = 0; 
+001E:  CLRF   22
+001F:  RETURN
+.................... } 
+....................  
+.................... void change_speed() 
+.................... { 
+....................    if(input(button_speed_up)) 
+*
+0034:  BSF    03.5
+0035:  BSF    05.0
+0036:  BCF    03.5
+0037:  BTFSS  05.0
+0038:  GOTO   040
+....................    { 
+....................       speed += 5; 
+0039:  MOVLW  05
+003A:  ADDWF  24,F
+....................       while(input(button_speed_up)); 
+003B:  BSF    03.5
+003C:  BSF    05.0
+003D:  BCF    03.5
+003E:  BTFSC  05.0
+003F:  GOTO   03B
+....................    } 
+....................     
+....................    if(input(button_speed_down)) 
+0040:  BSF    03.5
+0041:  BSF    05.1
+0042:  BCF    03.5
+0043:  BTFSS  05.1
+0044:  GOTO   04C
+....................    { 
+....................       speed -= 5; 
+0045:  MOVLW  05
+0046:  SUBWF  24,F
+....................       while(input(button_speed_down)); 
+0047:  BSF    03.5
+0048:  BSF    05.1
+0049:  BCF    03.5
+004A:  BTFSC  05.1
+004B:  GOTO   047
+....................    } 
+004C:  RETURN
+.................... } 
+....................  
+.................... void change_way() 
+.................... { 
+....................    if(input(button_way)) 
+*
+0020:  BSF    03.5
+0021:  BSF    05.2
+0022:  BCF    03.5
+0023:  BTFSS  05.2
+0024:  GOTO   027
+....................    u += 1; 
+0025:  MOVLW  01
+0026:  ADDWF  2A,F
+....................    while(input(button_way)); 
+0027:  BSF    03.5
+0028:  BSF    05.2
+0029:  BCF    03.5
+002A:  BTFSC  05.2
+002B:  GOTO   027
+....................    way = u % 2; 
+002C:  MOVF   2A,W
+002D:  ANDLW  01
+002E:  MOVWF  23
+....................    if(way == 10) 
+002F:  MOVF   23,W
+0030:  SUBLW  0A
+0031:  BTFSC  03.2
+....................    way = 0; 
+0032:  CLRF   23
+0033:  RETURN
+.................... } 
+....................  
+.................... void delay_button() 
+.................... {   
+....................    for(k=0; k<5; k++) 
+*
+004D:  CLRF   29
+004E:  MOVF   29,W
+004F:  SUBLW  04
+0050:  BTFSS  03.0
+0051:  GOTO   070
+....................    { 
+....................       start_stop(); 
+0052:  CALL   00C
+....................       change_way(); 
+0053:  CALL   020
+....................       change_speed(); 
+0054:  CALL   034
+....................       delay_ms(speed); 
+0055:  MOVF   24,W
+0056:  MOVWF  2C
+....................       if(start == 0) 
+*
+006B:  MOVF   22,F
+006C:  BTFSC  03.2
+....................       break; 
+006D:  GOTO   070
+006E:  INCF   29,F
+006F:  GOTO   04E
+....................    } 
+0070:  BCF    0A.3
+0071:  BCF    0A.4
+0072:  GOTO   0B6 (RETURN)
+.................... } 
+....................  
+.................... void main() 
+0073:  MOVF   03,W
+0074:  ANDLW  1F
+0075:  MOVWF  03
+0076:  CLRF   20
+0077:  MOVLW  01
+0078:  MOVWF  21
+0079:  CLRF   22
+007A:  CLRF   23
+007B:  MOVLW  0A
+007C:  MOVWF  24
+007D:  CLRF   25
+007E:  CLRF   26
+007F:  MOVLW  FF
+0080:  MOVWF  2B
+0081:  BSF    03.5
+0082:  BSF    1F.0
+0083:  BSF    1F.1
+0084:  BSF    1F.2
+0085:  BCF    1F.3
+0086:  MOVLW  07
+0087:  MOVWF  1C
+0088:  BCF    03.7
+.................... { 
+....................    set_tris_a(0xff); 
+0089:  MOVLW  FF
+008A:  MOVWF  05
+....................    set_tris_c(0x00); 
+008B:  MOVLW  00
+008C:  MOVWF  07
+008D:  BCF    03.5
+008E:  MOVWF  2B
+....................    output_c(0x00); 
+008F:  MOVWF  2B
+0090:  BSF    03.5
+0091:  CLRF   07
+0092:  BCF    03.5
+0093:  CLRF   07
+....................     
+.................... while(1) 
+.................... {  
+....................    start_stop(); 
+0094:  CALL   00C
+....................    change_way(); 
+0095:  CALL   020
+....................    change_speed(); 
+0096:  CALL   034
+....................    while(start == 1) 
+0097:  DECFSZ 22,W
+0098:  GOTO   0C1
+....................    { 
+....................       for(a=0; a<4; a++) 
+0099:  CLRF   27
+009A:  MOVF   27,W
+009B:  SUBLW  03
+009C:  BTFSS  03.0
+009D:  GOTO   0BB
+....................       {   
+....................          if(way == 0) 
+009E:  MOVF   23,F
+009F:  BTFSS  03.2
+00A0:  GOTO   0A5
+....................          i = (i+1)%4; 
+00A1:  MOVLW  01
+00A2:  ADDWF  28,W
+00A3:  ANDLW  03
+00A4:  MOVWF  28
+....................          if(way == 1) 
+00A5:  DECFSZ 23,W
+00A6:  GOTO   0AB
+....................          i = (i-1)%4;         
+00A7:  MOVLW  01
+00A8:  SUBWF  28,W
+00A9:  ANDLW  03
+00AA:  MOVWF  28
+....................          output_c(digit[i]); 
+00AB:  MOVF   28,W
+00AC:  CALL   004
+00AD:  MOVWF  2C
+00AE:  MOVLW  00
+00AF:  MOVWF  2B
+00B0:  BSF    03.5
+00B1:  CLRF   07
+00B2:  BCF    03.5
+00B3:  MOVF   2C,W
+00B4:  MOVWF  07
+....................          delay_button(); 
+00B5:  GOTO   04D
+....................          if(start == 0) 
+00B6:  MOVF   22,F
+00B7:  BTFSC  03.2
+....................          break; 
+00B8:  GOTO   0BB
+00B9:  INCF   27,F
+00BA:  GOTO   09A
+....................       } 
+....................       start_stop(); 
+00BB:  CALL   00C
+....................       change_way(); 
+00BC:  CALL   020
+....................       if(start == 0) 
+00BD:  MOVF   22,F
+00BE:  BTFSC  03.2
+....................       break; 
+00BF:  GOTO   0C1
+00C0:  GOTO   097
+....................    } 
+00C1:  GOTO   094
+.................... } 
+....................  
+.................... } 
+00C2:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F72   HS NOWDT PUT BROWNOUT NOLVP NOCPD NOWRT NODEBUG NOPROTECT

@@ -1,0 +1,110 @@
+#include <main.h>
+
+#fuses XT, NOWDT,NOPROTECT
+#use delay(clock=4000000)
+#include <lcd420.c> 
+#define ileri1 pin_a0
+#define geri1 pin_a1
+#define ileri2 pin_a2
+#define geri2 pin_a3
+#define in1   pin_d0
+#define in2   pin_d1
+#define in3   pin_d4
+#define in4   pin_d5
+int a,b,c,d;
+void main()
+{
+   set_tris_a(0xFF);
+   set_tris_b(0x00);
+   set_tris_d(0x00);
+   output_b(0x00);
+   output_d(0x00);
+   lcd_init();
+   
+   while(TRUE)
+   {
+           
+           printf(lcd_putc, "\f dc \nmotor \nuygulamasi");
+           delay_ms(1000);
+       
+       if(input(ileri1))
+       {
+          a=1;
+          b=0; c=0;
+          d=0;
+       }
+       
+       if(input(ileri2))
+       {
+          b=1;
+          a=0;
+          c=0;
+          d=0;
+       }
+       
+      if(input(geri1))
+       {
+          c=1; a=0;
+          b=0; d=0;
+       }
+          
+      if(input(geri2))
+       {
+          d=1;b=0; c=0;
+          a=0;
+       }    
+          
+          
+          
+         While(a==1)
+         { 
+           output_high(pin_d2);
+           output_low(pin_d3);
+           output_high(in1);
+           output_low(in2);
+           lcd_gotoxy(1,1);
+           printf(lcd_putc, "\f 1.motor \nileri");
+           delay_ms(1000);
+           
+         }
+         
+         
+          While(c==1)
+         { 
+           output_high(pin_d2);
+           output_low(pin_d3);
+           output_low(in1);
+           output_high(in2);
+           lcd_gotoxy(1,1);
+           printf(lcd_putc, "\f1.motor \ngeri");
+           delay_ms(1000);
+         }
+         
+         
+         
+          While(b==1)
+         { 
+           output_high(pin_d3);
+           output_low(pin_d2);
+           output_high(in3);
+           output_low(in4);
+           lcd_gotoxy(1,3);
+           printf(lcd_putc,"\f2.motor \nileri");
+           delay_ms(1000);
+         }
+         
+         
+          While(d==1)
+         { 
+           output_high(pin_d3);
+           output_low(pin_d2);
+           output_low(in3);
+           output_high(in4);
+           lcd_gotoxy(1,3);
+           printf(lcd_putc,"\f2.motor \ngeri");
+           delay_ms(1000);
+         }
+
+}
+}
+

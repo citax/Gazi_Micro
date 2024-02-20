@@ -1,0 +1,32 @@
+#include <main.h>
+#fuses HS, NOWDT, NOPROTECT 
+#use delay(clock=4000000)
+unsigned int kesme =0;
+
+#int_timer2
+void timer2_kesme()
+{
+kesme++;
+output_high(pin_d0);
+output_low(pin_d0);
+}
+
+void main()
+{  
+   set_tris_a(0x01);  
+   set_tris_d(0x00);
+   output_d(0x00);
+   
+   setup_timer_2(T2_DIV_BY_16,250,16);
+   enable_interrupts(int_timer2);
+   enable_interrupts(global);
+   
+   while(TRUE)
+   {
+         if(input(pin_a0))
+         output_d(kesme);
+      
+   }
+}
+
+

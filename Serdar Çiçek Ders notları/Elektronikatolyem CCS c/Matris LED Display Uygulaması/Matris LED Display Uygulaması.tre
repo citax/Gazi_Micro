@@ -1,0 +1,19 @@
+ÀÄMatris LED Display Uygulaması
+   ÀÄMAIN  0/133  Ram=0
+      ÃÄ@cinit1  (Inline)  Ram=0
+      ÃÄmatris_karakter_gonder  0/52  Ram=6
+      ³  ÃÄsutunsec  0/28  Ram=1
+      ³  ³  ÀÄ@goto46051  0/9  Ram=0
+      ³  ÀÄ@delay_ms1  (Inline)  Ram=1
+      ÃÄmatris_karakter_gonder  0/52  Ram=6
+      ³  ÀÄ*
+      ÃÄmatris_karakter_gonder  0/52  Ram=6
+      ³  ÀÄ*
+      ÃÄmatris_karakter_gonder  0/52  Ram=6
+      ³  ÀÄ*
+      ÃÄmatris_karakter_gonder  0/52  Ram=6
+      ³  ÀÄ*
+      ÃÄmatris_karakter_gonder  0/52  Ram=6
+      ³  ÀÄ*
+      ÀÄmatris_karakter_gonder  0/52  Ram=6
+         ÀÄ*

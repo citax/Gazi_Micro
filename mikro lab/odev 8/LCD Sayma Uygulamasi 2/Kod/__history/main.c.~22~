@@ -1,0 +1,89 @@
+#include <main.h>
+#fuses XT,NOWDT,NOPROTECT
+#use delay(clock = 4000000)
+#define use_portb_lcd TRUE
+#include <lcd.c>
+int up1,up2,plus = 0;
+int i,k,x,z;
+
+void button_up1()
+{
+   if(input(pin_A0))
+   {
+      up1=1;
+      up2=0;
+      plus=0;
+      i++;
+      while(input(pin_A0));
+   }
+}
+
+void button_up2()
+{
+   if(input(pin_A1))
+   {
+      up1=0;
+      up2=1;
+      plus=0;
+      z++;
+      while(input(pin_A1));
+   }
+}
+
+void button_plus()
+{
+   if(input(pin_A2))
+   {
+      up1=0;
+      up2=0;
+      plus=1;
+      x = z+i;
+      while(input(pin_A2));
+   }
+}
+
+void delay_button()
+{
+   for(k=0;k<20;k++)
+   {
+   button_up1();
+   button_up2();
+   button_plus();
+   delay_ms(5);
+   }
+
+}
+
+void main()
+{
+   set_tris_b(0x00);
+   lcd_init();
+   printf(lcd_putc,"\f Butona Basiniz!",);
+   
+   while(TRUE)
+   {     
+        button_up1();
+        button_up2();
+        button_plus(); 
+
+        if(up1==1 && up2==0 && plus==0)
+        {
+        
+        printf(lcd_putc,"\f Birinci Sayi= %d",i);   
+        delay_button();
+        }
+        
+        if(up1==0 && up2==1 && plus==0)
+        {
+       
+        printf(lcd_putc,"\f sayi= %d",);
+        delay_button();
+        }
+        
+        if(up1==0 && up2==0 && plus==1)
+        {
+        lcd_send_byte(0,0x0d);
+        }
+   }
+
+}

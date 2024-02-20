@@ -1,0 +1,37 @@
+[PROJECT]
+Target=Matris LED Display Uygulamasý.hex
+Processor_Text=PIC16F877
+CCSVersion=5.049
+Compiler=PCM
+[Target Data]
+FileList=Matris LED Display Uygulamasý.c
+[Matris LED Display Uygulamasý.c]
+Type=4
+[mru-list]
+1=Matris LED Display Uygulamasý.c
+
+[defines]
+buildcount=4
+
+[Opened Files]
+1=..\..\..\..\2.ÖDEV\ÖDEV2.c
+t1=1
+2=..\..\..\..\ÖDEV2\ÖDEV2.c
+t2=1
+Count=1
+[Units]
+Count=1
+1=Matris LED Display Uygulamasý (main)
+
+[ProjectLog]
+Days=1
+D1=29-03-2022
+D1_L=4
+D1_L1=[713]Stopped Editing.
+TotalEdit=4
+TotalDebug=0
+D1_E=4
+D1_D=0
+D1_L2=[713]Project Closed.
+D1_L3=[1159]Project Opened.
+D1_L4=[1216]Project Closed.

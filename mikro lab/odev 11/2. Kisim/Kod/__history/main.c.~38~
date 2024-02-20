@@ -1,0 +1,22 @@
+#include <16f877A.h>
+#fuses HS,NOWDT,NOPROTECT
+#use delay(clock=4000000)
+
+
+const int ileri_digit[4] = {0x03, 0x06 , 0x0C, 0x09};
+const int geri_digit[4]  = {0x09, 0x0C ,0x06 , 0x03};
+
+
+
+
+
+void main()
+{
+   
+while(1)
+{ 
+   
+
+}
+
+}

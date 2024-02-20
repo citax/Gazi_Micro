@@ -1,0 +1,43 @@
+#include <main.h>
+#fuses HS, NOWDT, NOPROTECT 
+#use delay(clock=4000000)
+#define pin_start pin_A0
+#define pin_stop pin_A1
+int up,stop,no = 0;
+
+void start()
+{  
+   if(input(pin_start) && !input(pin_stop))
+   {
+      up = 1;
+      stop = 0;
+   }
+}
+
+void stop()
+{  
+   if(!input(pin_start) && input(pin_stop))
+   {
+      up = 0;
+      stop = 1;
+   }
+   if(stop == 1)
+   break;
+}
+
+
+void main()
+{  
+   set_tris_a(0xFF);  
+   set_tris_b(0xFF);
+   set_tris_d(0x00);
+   output_d(0x00);
+   
+   while(TRUE)
+   {
+      
+      
+      
+   }
+
+}

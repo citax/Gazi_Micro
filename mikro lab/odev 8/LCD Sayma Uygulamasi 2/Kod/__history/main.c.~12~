@@ -1,0 +1,78 @@
+#include <main.h>
+#fuses XT,NOWDT,NOPROTECT
+#use delay(clock = 4000000)
+#define use_portb_lcd TRUE
+#include <lcd.c>
+int number,up,down,i = 0;
+
+void button_up()
+{
+   if(input(pin_A0))
+   {
+      up=1;
+      down=0;
+      while(input(pin_A0));
+   }
+}
+
+void button_down()
+{
+   if(input(pin_A1))
+   {
+      up=0;
+      down=1;
+      while(input(pin_A1));
+   }
+}
+
+
+void button_stop()
+{
+   if(input(pin_A2))
+   {
+      up=0;
+      down=0;
+      while(input(pin_A2));
+   }
+}
+
+void delay_buton()
+{
+   for(i=0,i<20,i++)
+   {
+   button_up();
+   button_down();
+   button_stop();
+   delay_ms(5);
+   }
+
+}
+
+void main()
+{
+   set_tris_b(0x00);
+   lcd_init();
+  
+   while(TRUE)
+   {  
+        button_up();
+        button_down();
+        button_stop(); 
+        lcd_send_byte(0,0x0d);
+
+        if(up==1 && down==0)
+        {
+        number++;
+        printf(lcd_putc,"\f sayi= %d",number);   
+        delay_buton();
+        }
+        
+        if(up==0 && down==1)
+        {
+        number--;
+        printf(lcd_putc,"\f sayi= %d",number);
+        delay_buton();
+        }
+   }
+
+}

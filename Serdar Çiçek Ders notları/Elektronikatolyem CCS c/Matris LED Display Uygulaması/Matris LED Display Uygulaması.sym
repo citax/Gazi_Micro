@@ -1,0 +1,75 @@
+004-005 @READ_PROGRAM_MEMORY8.P1
+004-005 @WRITE_PROGRAM_MEMORY8.P2
+008     PSP_DATA
+015     CCP_1
+015     CCP_1_LOW
+016     CCP_1_HIGH
+01B     CCP_2_LOW
+01B     CCP_2
+01C     CCP_2_HIGH
+020-024 A
+025-029 B
+02A-02E C
+02F-033 D
+034-038 E
+039-03D arti
+03E-042 cift_ok
+043-044 matris_karakter_gonder.harf
+045     matris_karakter_gonder.tekrar
+046     matris_karakter_gonder.i
+047     matris_karakter_gonder.j
+048     sutunsec.s
+048     @delay_ms1.P1
+048     matris_karakter_gonder.@SCRATCH1
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+10D-10E @READ_PROGRAM_MEMORY8.P1
+10D-10E @WRITE_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+000004  sutunsec
+000020  @goto46051
+000029  matris_karakter_gonder
+000044  @delay_ms1
+00005D  MAIN
+00005D  @cinit1
+000065  @cinit2
+
+Project Directory:
+    C:\Users\Asus\Desktop\GAZÝ NOT\mikroiþlemci\Elektronikatolyem CCS c\Matris LED Display Uygulamasý\
+
+Project Files:
+    Matris LED Display Uygulamasý.c                         [02-Aðu-08 23:54  CRC=43A6CC6C]
+    ..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16f877.h [08-Eyl-15 15:15  CRC=143AECBE]
+
+Source signature=6C1CA5E8
+Program memory checksum=0000
+Program memory CRC=0000
+Hex file CRC=79B2
+
+Units:
+    Matris LED Display Uygulamasý (main)
+
+Compiler Settings:
+    Processor:      PIC16F877
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+    Compile Mode:       CCS5
+
+Output Files:
+    XREF file:   Matris LED Display Uygulamasý.xsym
+    Errors:      Matris LED Display Uygulamasý.err
+    Ext Symbols: Matris LED Display Uygulamasý.esym
+    INHX8:       Matris LED Display Uygulamasý.hex
+    Symbols:     Matris LED Display Uygulamasý.sym
+    List:        Matris LED Display Uygulamasý.lst
+    Debug/COFF:  Matris LED Display Uygulamasý.cof
+    Project:     Matris LED Display Uygulamasý.ccspjt
+    Call Tree:   Matris LED Display Uygulamasý.tre
+    Statistics:  Matris LED Display Uygulamasý.STA

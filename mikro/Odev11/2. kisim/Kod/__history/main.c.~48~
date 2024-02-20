@@ -1,0 +1,112 @@
+#include <16f877A.h>
+#fuses HS,NOWDT,NOPROTECT
+#use delay(clock=4000000)
+
+#define buton_1 pin_A0
+#define buton_2 pin_A1
+#include <lcd420.c>
+
+
+const int digit[4] = {0x03, 0x06 , 0x0C, 0x09};
+
+int k,i,y,j, adim=0;
+int geri = 0;
+int ileri = 0;
+int drc;
+
+void buton()
+{
+   if(input(buton_1)) //ileri butonu
+   {
+      ileri = 1; 
+      geri = 0;
+   }
+   
+   if(input(buton_2)) //ileri butonu
+   {
+      ileri = 0; 
+      geri = 1;
+   }
+
+}
+
+void delay_buton()
+{
+   for(int t=0; t<100; t++)
+   {
+      buton();
+      delay_ms(10);
+   }
+   
+}
+
+
+void main()
+{
+   set_tris_a(0xff);
+   set_tris_c(0x00); 
+   output_c(0x00); 
+   lcd_init();
+   lcd_putc('selam');
+   printf(lcd_putc, "\fStarting...");
+   delay_ms(1000);
+   
+while(1)
+{ 
+   buton();
+   
+   while(ileri == 1 && geri == 0) 
+   {
+      for(i=0; i<2; i++)
+      {
+         for(k=0; k<4; k++)  //90 derece oldugundan 4 kere donmeli
+         {
+            if(drc == 360)
+            drc = 0;
+            
+            adim = (adim+1)%4;
+            output_c(digit[adim]);
+            drc += 45;
+            printf(lcd_putc, "\fDerece = %d", drc);
+            delay_buton();
+            if(geri == 1 && ileri == 0)
+            break;
+            
+         }
+         
+         if(geri == 1 && ileri == 0)
+         break;
+      }
+      ileri = 0;
+   }
+   
+    while(ileri == 0 && geri == 1)
+   {
+      for(y=0; y<2; y++)
+      {
+         for(j=0; j<4; j++)  //90 derece oldugundan 4 kere donmeli
+         {
+            if(drc == 0)
+            drc = 360;
+            
+            adim = (adim-1)%4;
+            output_c(digit[adim]);
+            drc -= 45;
+            printf(lcd_putc, "\fDerece = %d", drc);
+            delay_buton();
+            if(geri == 0 && ileri == 1)       
+            break;
+            
+         }
+         if(geri == 0 && ileri == 1)
+         break;
+      }
+      geri = 0;
+   }
+   
+ 
+}
+
+}
+
+

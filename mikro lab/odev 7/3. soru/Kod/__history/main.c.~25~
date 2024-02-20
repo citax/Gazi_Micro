@@ -1,0 +1,40 @@
+#include <main.h>
+#fuses HS, WDT, NOPROTECT 
+#use delay(clock=4000000)
+
+int led = 0x01;
+
+
+
+void main()
+{  
+   set_tris_c(0xFF);  
+   set_tris_d(0x00);
+   output_d(0x00);
+   //setup_WDT(RTCC_EXT_H_TO_L | RTCC_DIV_2);
+   //set_timer0(248);
+   //enable_interrupts(INT_timer0);
+   //enable_interrupts(GLOBAL);
+   
+   while(TRUE)
+   {
+  
+         for(int i=0 ; i<7 ; i++)
+         {  
+            output_d(led);
+            led = led << 1 ;
+            delay_ms(100);          
+         }
+       
+         for(int y =0; y<7; y++)
+         {
+            output_d(led);
+            led = led >> 1 ;
+             delay_ms(100);                    
+         }
+         
+      }
+      
+   }
+
+

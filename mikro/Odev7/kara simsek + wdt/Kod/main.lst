@@ -1,0 +1,208 @@
+CCS PCM C Compiler, Version 5.015, 5967               18-Nis-23 21:42
+
+               Filename:   E:\Okul\Mikro\mikro\Odev7\kara simsek + kesme\Kod\main.lst
+
+               ROM used:   130 words (2%)
+                           Largest free fragment is 2048
+               RAM used:   7 (2%) at main() level
+                           10 (3%) worst case
+               Stack used: 1 locations
+               Stack size: 8
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   019
+0003:  NOP
+.................... #include <main.h> 
+.................... #include <16F877A.h> 
+.................... //////////// Standard Header file for the PIC16F877A device //////////////// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996, 2013 Custom Computer Services          //// 
+.................... //// This source code may only be used by licensed users of the CCS C  //// 
+.................... //// compiler.  This source code may only be distributed to other      //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction //// 
+.................... //// or distribution is permitted without written permission.          //// 
+.................... //// Derivative programs created using this software in object code    //// 
+.................... //// form are not restricted in any way.                               //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... #device PIC16F877A 
+....................  
+.................... #list 
+....................  
+.................... #device ADC=16 
+....................  
+.................... #FUSES NOWDT                 	//No Watch Dog Timer 
+.................... #FUSES NOBROWNOUT            	//No brownout reset 
+.................... #FUSES NOLVP                 	//No low voltage prgming, B3(PIC16) or B5(PIC18) used for I/O 
+....................  
+.................... #use delay(crystal=4MHz) 
+....................  
+....................  
+.................... #fuses HS, WDT, NOPROTECT  
+.................... #use delay(clock=4000000) 
+0004:  MOVLW  24
+0005:  MOVWF  04
+0006:  BCF    03.7
+0007:  MOVF   00,W
+0008:  BTFSC  03.2
+0009:  GOTO   018
+000A:  MOVLW  01
+000B:  MOVWF  78
+000C:  CLRF   77
+000D:  DECFSZ 77,F
+000E:  GOTO   00D
+000F:  DECFSZ 78,F
+0010:  GOTO   00C
+0011:  MOVLW  4A
+0012:  MOVWF  77
+0013:  DECFSZ 77,F
+0014:  GOTO   013
+0015:  GOTO   016
+0016:  DECFSZ 00,F
+0017:  GOTO   00A
+0018:  RETURN
+.................... int led = 0x01; 
+.................... void main() 
+0019:  MOVF   03,W
+001A:  ANDLW  1F
+001B:  MOVWF  03
+001C:  MOVLW  01
+001D:  MOVWF  20
+001E:  MOVLW  FF
+001F:  MOVWF  21
+0020:  BSF    03.5
+0021:  BSF    1F.0
+0022:  BSF    1F.1
+0023:  BSF    1F.2
+0024:  BCF    1F.3
+0025:  MOVLW  07
+0026:  MOVWF  1C
+0027:  BCF    03.7
+.................... {   
+....................    set_tris_c(0xFF);   
+0028:  MOVLW  FF
+0029:  MOVWF  07
+002A:  BCF    03.5
+002B:  MOVWF  21
+....................    set_tris_d(0x00); 
+002C:  MOVLW  00
+002D:  BSF    03.5
+002E:  MOVWF  08
+....................    output_d(0x00); 
+002F:  CLRF   08
+0030:  BCF    03.5
+0031:  CLRF   08
+....................    setup_WDT(WDT_2304MS); 
+0032:  MOVLW  0F
+0033:  MOVWF  77
+0034:  CLRF   01
+0035:  MOVLW  81
+0036:  MOVWF  04
+0037:  BCF    03.7
+0038:  MOVF   00,W
+0039:  ANDLW  F0
+003A:  IORLW  07
+003B:  MOVWF  00
+003C:  CLRWDT
+003D:  MOVF   00,W
+003E:  ANDLW  F7
+003F:  BTFSC  77.3
+0040:  ANDLW  F0
+0041:  IORWF  77,W
+0042:  MOVWF  00
+....................   
+....................    while(TRUE) 
+....................    { 
+....................    
+....................          for(int i=0 ; i<7 ; i++) 
+0043:  CLRF   22
+0044:  MOVF   22,W
+0045:  SUBLW  06
+0046:  BTFSS  03.0
+0047:  GOTO   05D
+....................          {   
+....................             output_d(led); 
+0048:  BSF    03.5
+0049:  CLRF   08
+004A:  BCF    03.5
+004B:  MOVF   20,W
+004C:  MOVWF  08
+....................             led = led << 1 ; 
+004D:  BCF    03.0
+004E:  RLF    20,F
+....................             delay_ms(100);  
+004F:  MOVLW  64
+0050:  MOVWF  24
+0051:  CALL   004
+....................                 while (input(pin_c0)) 
+0052:  BSF    21.0
+0053:  MOVF   21,W
+0054:  BSF    03.5
+0055:  MOVWF  07
+0056:  BCF    03.5
+0057:  BTFSS  07.0
+0058:  GOTO   05B
+....................          restart_WDT(); 
+0059:  CLRWDT
+005A:  GOTO   052
+005B:  INCF   22,F
+005C:  GOTO   044
+....................          } 
+....................           
+....................          for(int y =0; y<7; y++) 
+005D:  CLRF   23
+005E:  MOVF   23,W
+005F:  SUBLW  06
+0060:  BTFSS  03.0
+0061:  GOTO   077
+....................          { 
+....................             output_d(led); 
+0062:  BSF    03.5
+0063:  CLRF   08
+0064:  BCF    03.5
+0065:  MOVF   20,W
+0066:  MOVWF  08
+....................             led = led >> 1 ; 
+0067:  BCF    03.0
+0068:  RRF    20,F
+....................              delay_ms(100);          
+0069:  MOVLW  64
+006A:  MOVWF  24
+006B:  CALL   004
+....................                  while (input(pin_c0)) 
+006C:  BSF    21.0
+006D:  MOVF   21,W
+006E:  BSF    03.5
+006F:  MOVWF  07
+0070:  BCF    03.5
+0071:  BTFSS  07.0
+0072:  GOTO   075
+....................          restart_WDT(); 
+0073:  CLRWDT
+0074:  GOTO   06C
+0075:  INCF   23,F
+0076:  GOTO   05E
+....................          } 
+....................           
+....................          while (input(pin_c0)) 
+0077:  BSF    21.0
+0078:  MOVF   21,W
+0079:  BSF    03.5
+007A:  MOVWF  07
+007B:  BCF    03.5
+007C:  BTFSS  07.0
+007D:  GOTO   080
+....................          restart_WDT(); 
+007E:  CLRWDT
+007F:  GOTO   077
+0080:  GOTO   043
+....................       } 
+....................        
+....................    } 
+....................  
+0081:  SLEEP
+....................  
+
+Configuration Fuses:
+   Word  1: 3F36   HS WDT PUT NOBROWNOUT NOLVP NOCPD NOWRT NODEBUG NOPROTECT

@@ -1,0 +1,11 @@
+#include <4.soru.h>
+
+void main()
+{
+
+	while(TRUE)
+	{
+		//TODO: User Code
+	}
+
+}

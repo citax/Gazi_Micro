@@ -1,0 +1,16 @@
+#include <16f877A.h>
+#use delay(clock = 4000000)
+#include <lcd.c>
+
+
+
+void main()
+{
+   lcd_init();
+   printf(lcd_putc,"Hello");
+   while(TRUE)
+   {
+    
+   }
+
+}

@@ -1,0 +1,127 @@
+#include <2.soru.h>
+#fuses XT, NOWDT, NOPROTECT
+#use delay(clock=4000000)
+#define buton1 pin_A0
+#define buton2 pin_A1
+#define stop pin_A2
+int a;
+
+void main()
+{
+
+set_tris_a(0xFF);
+set_tris_b(0x00);
+output_b(0x00);
+
+
+while(1)
+{
+
+  if(input(buton1))
+   {
+    delay_ms(15);
+         if(input(stop))
+           {
+             output_b(0x00);
+             break;
+           }
+           
+     for(a=0;a<5;a++)
+      {
+        
+           if(input(stop))
+           {
+             output_b(0x00);
+             break;
+           }
+           
+       output_b(0xFF);
+            
+          if(input(stop))
+            {
+              output_b(0x00);
+              break;
+            }
+           
+       delay_ms(500);
+                
+           if(input(stop))
+             {
+               output_b(0x00);
+               break;
+             }
+                   
+       output_b(0x00);
+                
+            if(input(stop))
+              {
+                output_b(0x00);
+                break;
+              }
+                   
+       delay_ms(500);
+               
+             if(input(stop))
+              {
+                output_b(0x00);
+                break;
+              }
+      }
+            
+   }
+     
+  else if(input(buton2))
+   {
+       delay_ms(15);
+       
+              if(input(stop))
+                {
+                  output_b(0x00);
+                  break;
+                }
+    for(a=0;a<10;a++)
+      {
+        
+              if(input(stop))
+                {
+                  output_b(0x00);
+                  break;
+                }
+           
+       output_b(0xFF);
+           
+              if(input(stop))
+                {
+                  output_b(0x00);
+                  break;
+                }
+           
+       delay_ms(500);
+               
+               if(input(stop))
+                 {
+                   output_b(0x00);
+                   break;
+                 }
+                   
+       output_b(0x00);
+               
+               if(input(stop))
+                 {
+                   output_b(0x00);
+                   break;
+                 }
+                   
+      delay_ms(500);
+               
+               if(input(stop))
+                 {
+                   output_b(0x00);
+                   break;
+                 }
+      }
+           
+   }
+        
+}
+}

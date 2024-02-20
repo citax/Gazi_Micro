@@ -1,0 +1,14 @@
+ÀÄ2
+   ÀÄMAIN  0/80  Ram=1
+      ÃÄ@cinit1  (Inline)  Ram=0
+      ÃÄstart_stop  0/20  Ram=0
+      ÃÄchange_way  0/20  Ram=0
+      ÃÄchange_speed  0/25  Ram=0
+      ÃÄ@const621  0/8  Ram=0
+      ÃÄdelay_button  0/38  Ram=0
+      ³  ÃÄstart_stop  0/20  Ram=0
+      ³  ÃÄchange_way  0/20  Ram=0
+      ³  ÃÄchange_speed  0/25  Ram=0
+      ³  ÀÄ@delay_ms1  (Inline)  Ram=1
+      ÃÄstart_stop  0/20  Ram=0
+      ÀÄchange_way  0/20  Ram=0

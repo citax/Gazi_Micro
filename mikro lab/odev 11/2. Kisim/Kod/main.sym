@@ -1,0 +1,76 @@
+004-005 @READ_PROGRAM_MEMORY8.P1
+004-005 @WRITE_PROGRAM_MEMORY8.P2
+008     PSP_DATA
+015     CCP_1
+015     CCP_1_LOW
+016     CCP_1_HIGH
+01B     CCP_2
+01B     CCP_2_LOW
+01C     CCP_2_HIGH
+020     start_pin
+021     stop_pin
+022     start
+023     way
+024     speed
+025     x
+026     adim
+027     a
+028     i
+029     k
+02A     u
+02B     @TRIS_C
+02C     @delay_ms1.P1
+02C     MAIN.@SCRATCH1
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+09C.6   C1OUT
+09C.7   C2OUT
+10D-10E @WRITE_PROGRAM_MEMORY8.P1
+10D-10E @READ_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+000004  digit.call
+000008  digit.data
+00000C  start_stop
+000020  change_way
+000034  change_speed
+00004D  delay_button
+000057  @delay_ms1
+000073  @cinit1
+000073  MAIN
+000088  @cinit2
+
+Project Directory:
+    E:\Okul\Mikroislemci\mikro lab\odev 11\2. Kisim\Kod\
+
+Project Files:
+    main.c                                                  [28-May-23 23:33  CRC=2CE0A8C8]
+    C:\Program Files (x86)\PICC\Devices\16f877A.h           [12-Kas-13 14:35  CRC=81334808]
+
+Source signature=2F4738D8
+
+Units:
+    main (main)
+
+Compiler Settings:
+    Processor:      PIC16F877A
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    XREF file:   main.xsym
+    Errors:      main.err
+    Ext Symbols: main.esym
+    INHX8:       main.hex
+    Symbols:     main.sym
+    List:        main.lst
+    Debug/COFF:  main.cof
+    Project:     main.ccspjt
+    Call Tree:   main.tre
+    Statistics:  main.STA

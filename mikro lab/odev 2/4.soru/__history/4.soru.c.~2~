@@ -1,0 +1,91 @@
+#include <4.soru.h>
+#fuses XT, NOWDT, NOPROTECT
+#use delay(clock=4000000)
+#define buton pin_A0
+#define stop pin_A1
+int a,b=0;
+
+void main()
+{
+set_tris_a(0xFF);
+set_tris_b(0x00);
+
+output_b(0x00);
+
+
+while(1)
+{
+
+if(input(buton))
+{
+delay_ms(15);
+//delay_ms(100);     
+//delay_ms(200);     
+//delay_ms(300);     
+//delay_ms(500);
+b=b+1;
+while(input(start));
+}
+
+if(input(stop))
+     {
+     b=0;
+     output_b(0x00);
+     }
+
+
+if(c==10)
+{
+        if(input(stop))
+           {
+             output_b(0x00);
+             break;
+           }
+        
+        for(i=0;i<20;i++)
+        {
+        
+           if(input(stop))
+           {
+             output_b(0x00);
+             break;
+           }
+           
+           output_b(0xFF);
+           
+           if(input(stop))
+           {
+             output_b(0x00);
+             break;
+           }
+           
+           delay_ms(500);
+           
+           if(input(stop))
+           {
+             output_b(0x00);
+             break;
+           }
+           
+           output_b(0x00);
+           
+           if(input(stop))
+           {
+             output_b(0x00);
+             break;
+           }
+           
+           delay_ms(500);
+           
+           if(input(stop))
+           {
+             output_b(0x00);
+             break;
+           }
+           
+    
+}
+}
+}
+}
+

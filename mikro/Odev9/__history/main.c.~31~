@@ -1,0 +1,27 @@
+#include <main.h>
+
+#include <lcd.c>
+#fuses HS,NOWDT,NOPROTECT,NOLVP
+#use delay(clock=20000000)
+
+void main() {
+   char text[]="Merhaba Dunya!";
+   int i;
+
+   lcd_init();
+   lcd_gotoxy(1,1);
+
+   for(i=0; i<16; i++) {
+      lcd_putc(text[i]);
+   }
+
+   lcd_gotoxy(1,2);
+
+   for(i=16; i<32; i++) {
+      lcd_putc(text[i]);
+   }
+
+   while(TRUE) {
+      // Sonsuz döngü
+   }
+}
